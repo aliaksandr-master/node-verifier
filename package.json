@@ -1,0 +1,43 @@
+{
+  "name": "node-verifier",
+  "version": "0.0.2",
+  "description": "extensible value validator",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt jshint && nodeunit test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aliaksandr-pasynkau/node-verifier.git"
+  },
+  "keywords": [
+    "node",
+    "validator",
+    "verifier",
+    "validate",
+    "verify",
+    "check",
+    "value",
+    "inspect"
+  ],
+  "author": "aliaksandr-pasynkau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aliaksandr-pasynkau/node-verifier/issues"
+  },
+  "homepage": "https://github.com/aliaksandr-pasynkau/node-verifier",
+  "dependencies": {
+    "async": "~0.9.0",
+    "lodash": "~2.4.1",
+    "error": "~4.3.0",
+    "email-validator": "^1.0.1"
+  },
+  "devDependencies": {
+    "colors": "^1.0.3",
+    "nodeunit": "~0.9.0",
+    "grunt": "~0.4.5",
+    "grunto": "~1.2.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-jshint": "~0.10.0"
+  }
+}

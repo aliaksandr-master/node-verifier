@@ -1,10 +1,10 @@
 "use strict";
 
-var _ = require('lodash');
+var _ = require('./../lib/utils');
 var Rule = require('./base/rule');
 
-module.exports = Rule.add('format', {
-	test: function (value, params, options, done) {
+module.exports = Rule.extend({
+	test: function (value, params, done) {
 		if (_.isString(params) || _.isNumber(params)) {
 			params = new RegExp(params);
 		}
@@ -12,9 +12,11 @@ module.exports = Rule.add('format', {
 		return params.test(value);
 	},
 
-	checkParams: function (params) {
+	prepareParams: function (params) {
 		if (!_.isRegExp(params) && !_.isString(params) && !_.isNumber(params)) {
-			return 'invalid value type, must be RegExp';
+			throw new Error('invalid value type, must be RegExp');
 		}
+
+		return params;
 	}
 });

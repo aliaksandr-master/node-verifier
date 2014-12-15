@@ -1,40 +1,36 @@
 "use strict";
 
-var _ = require('lodash');
+var _ = require('./../lib/utils');
 var Rule = require('./base/rule');
 
-module.exports = Rule.add('max_value', {
-	test: function (value, params, options, done) {
-		return Number(value) <= Number(params);
-	},
-
-	checkValue: function (value) {
+module.exports = Rule.extend({
+	test: function (value, params, done) {
 		if (_.isString(value)) {
 			var num = Number(value);
-			if ((num == value && !_.isNaN(num))) { // jshint ignore:line
-				return;
+			if ((num != value || _.isNaN(num))) { // jshint ignore: line
+				return false;
 			}
 		}
 
-		if (_.isNumber(value) && !_.isNaN(value)) {
-			return;
+		if (!(_.isNumber(value) && !_.isNaN(value))) {
+			return false;
 		}
 
-		return 'must be Number >= 0';
+		return Number(value) <= Number(params);
 	},
 
-	checkParams: function (param) {
+	prepareParams: function (param) {
 		if (_.isString(param)) {
 			var num = Number(param);
-			if ((num == param && !_.isNaN(num))) { // jshint ignore:line
-				return;
+			if ((num == param && !_.isNaN(num))) { // jshint ignore: line
+				return param;
 			}
 		}
 
 		if (_.isNumber(param) && !_.isNaN(param)) {
-			return;
+			return param;
 		}
 
-		return 'must be Number';
+		throw new Error('rule params must be Number');
 	}
 });

@@ -1,10 +1,10 @@
 "use strict";
 
-var _ = require('lodash');
+var _ = require('./../lib/utils');
 var Rule = require('./base/rule');
 
-module.exports = Rule.add('eq', {
-	test: function (value, params, options, done) {
+module.exports = Rule.extend({
+	test: function (value, params, done) {
 		return _.isEqual(params, value);
 	}
 });

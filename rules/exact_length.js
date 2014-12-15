@@ -1,33 +1,29 @@
 "use strict";
 
-var _ = require('lodash');
+var _ = require('./../lib/utils');
 var Rule = require('./base/rule');
 
-module.exports = Rule.add('exact_length', {
-	test: function (value, params, options, done) {
+module.exports = Rule.extend({
+	test: function (value, params, done) {
+		if (!_.isArray(value) && !_.isString(value) && !(_.isNumber(value) && !_.isNaN(value))) {
+			return false;
+		}
+
 		return (_.isArray(value) ? value : String(value)).length === Number(params);
 	},
 
-	checkValue: function (value) {
-		if (!_.isArray(value) && !_.isString(value) && !(_.isNumber(value) && !_.isNaN(value))) {
-			return 'must be String or Number';
-		}
-	},
-
-	checkParams: function (param) {
-		if (_.isString(param)) {
-			var num = Number(param);
-			/* jshint ignore:start */
-			if ((String(num) === param  && num >= 0)) {
-				return;
+	prepareParams: function (params) {
+		if (_.isString(params)) {
+			var num = Number(params);
+			if ((num == params  && num >= 0)) { // jshint ignore: line
+				return params;
 			}
-			/* jshint ignore:end */
 		}
 
-		if (_.isNumber(param) && param >= 0) {
-			return;
+		if (_.isNumber(params) && params >= 0) {
+			return params;
 		}
 
-		return 'must be Number >= 0';
+		throw new Error('must be Number >= 0');
 	}
 });

@@ -1,68 +1,92 @@
 "use strict";
 
-var _ = require('lodash');
+var _ = require('./lib/utils');
 
+var iterate = require('./lib/iterate');
+var tryRuleTest = require('./lib/tryRuleTest');
 var Rule = require('./rules/base/rule');
-var parseRules = require('./lib/parse-rules');
-var verify = require('./lib/verify');
-var initOptions = require('./lib/options');
 
-var ValidationError = require('./errors/validation');
-var ParamError = require('./errors/param');
-var ValueError = require('./errors/value');
-var InitError = require('./errors/init');
-
-require('./rules/exact_length');
-require('./rules/max_length');
-require('./rules/min_length');
-require('./rules/format');
-require('./rules/type');
-require('./rules/email');
-require('./rules/empty');
-require('./rules/max_value');
-require('./rules/min_value');
-require('./rules/eq');
-require('./rules/required');
-require('./rules/not');
-require('./rules/each');
-
-var validator = function validator (options, validations, value, done) {
-	options = initOptions(Rule, options);
-
-	if (arguments.length <= 1) {
-		return function (validations, value, done) {
-			var ruleObject = parseRules(Rule, validations, options);
-			var verifier = function (value, done) {
-				return verify(ruleObject, options, value, done);
-			};
-
-			if (arguments.length <= 1) {
-				return verifier;
-			}
-
-			return verifier(value, done);
-		};
+var Verifier = function Verifier (validations) {
+	if (!(this instanceof Verifier)) {
+		return new Verifier(validations);
 	}
 
-	var ruleObject = parseRules(Rule, validations, options);
-	var verifier = function (value, done) {
-		return verify(ruleObject, options, value, done);
-	};
-
-	if (arguments.length === 2) {
-		return verifier;
-	}
-
-	return verifier(value, done);
+	this.validations = this.parse(validations);
 };
 
-validator.options = Rule.options;
-validator.Rule = Rule;
-validator.rules = Rule.register;
+Verifier.prototype = {
+	parse: function  (validations) {
+		if (!_.isArray(validations)) {
+			validations = [validations];
+		}
 
-validator.ValidationError = ValidationError;
-validator.ParamError = ParamError;
-validator.ValueError = ValueError;
-validator.InitError = InitError;
+		return _.map(validations, function (validation) {
+			if (typeof validation === 'string') {
+				return this._parseString(validation);
+			}
+			if (_.isPlainObject(validation)) {
+				return this._parseObject(validation);
+			}
+			throw new Error('invalid rule type, must be string or plain object');
+		}, this);
+	},
 
-module.exports = validator;
+	verify: function (value, done) {
+		iterate.array(this.validations, function (rule, index, done) {
+			tryRuleTest(Verifier.Rule.ValidationError, rule, value, done);
+		}, done);
+	},
+
+	_RULE_STRING_FORMAT: /^\s*([a-zA-Z_][a-zA-Z0-9_]*)(.*)$/,
+
+	_parseString: function (validation) {
+		var name,
+			params = '';
+
+		validation.replace(this._RULE_STRING_FORMAT, function (w, _name, _params) {
+			name = _name;
+			params = _params.trim();
+		});
+
+		params = params.length ? this._parseParamsString(params) : null;
+
+		return Rule.create(name, params);
+	},
+
+	_parseParamsString: function (jsonSource) {
+		var json = null;
+
+		try {
+			json = JSON.parse(jsonSource);
+		} catch (err) {
+			json = jsonSource; // string
+		}
+
+		return json;
+	},
+
+	_parseObject: function (validation) {
+		var name = _.firstElement(validation);
+		return Rule.create(name, validation[name]);
+	}
+};
+
+Verifier.Rule = Rule;
+
+Rule.Verfier = Verifier;
+
+Rule.add('exact_length', require('./rules/exact_length'));
+Rule.add('max_length', require('./rules/max_length'));
+Rule.add('min_length', require('./rules/min_length'));
+Rule.add('format', require('./rules/format'));
+Rule.add('type', require('./rules/type'));
+Rule.add('email', require('./rules/email'));
+Rule.add('empty', require('./rules/empty'));
+Rule.add('max_value', require('./rules/max_value'));
+Rule.add('min_value', require('./rules/min_value'));
+Rule.add('eq', require('./rules/eq'));
+Rule.add('required', require('./rules/required'));
+Rule.add('not', require('./rules/not'));
+Rule.add('each', require('./rules/each'));
+
+module.exports = Verifier;

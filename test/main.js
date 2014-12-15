@@ -1,6 +1,6 @@
 "use strict";
 
-var tester = require('../lib/tester');
+var tester = require('./_lib/tester');
 
 exports.flow = {
 	standard_call: tester([
@@ -12,10 +12,6 @@ exports.flow = {
 		{ rules: {type: 'string'},                    value: "",     expect: true },
 		{ rules: [{type: 'string'}],                  value: 4,      expect: false },
 		{ rules: [{type: 'string'}],                  value: "",     expect: true },
-		{ rules: 'type string | max_length 2',        value: 4,      expect: false },
-		{ rules: 'type string | max_length 2',        value: "1",    expect: true },
-		{ rules: 'type string|max_length 2',          value: 4,      expect: false },
-		{ rules: 'type string|max_length 2',          value: "1",    expect: true },
 		{ rules: ['type string', 'max_length 2'],     value: 4,      expect: false },
 		{ rules: ['type string', 'max_length 2'],     value: "1",    expect: true },
 		{ rules: [{type: 'string'}, {max_length: 2}], value: 4,      expect: false },

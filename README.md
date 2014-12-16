@@ -4,23 +4,28 @@ node-verifier
 ##Usage
 
 ```js
-var verifier = require('node-verifier');
-var myVerifier = verifier(options); // options is optional
-
+var Verifier = require('node-verifier');
 
 // init the rules for verify
-var myValueVerifier = myVerifier(['type number', 'min_length 1', 'min_value 5']);
+var myValueVerifier = new Verifier(['type number', 'min_length 1', 'min_value 5']);
 // equal
-var myValueVerifier = myVerifier([{type: 'number'}, {min_length: 1}, {min_value: 5}]);
+var myValueVerifier = new Verifier(['type "number"', 'min_length "1"', 'min_value "5"']);
 // equal
-var myValueVerifier = myVerifier('type number|min_length 1|min_value 5');
-
+var myValueVerifier = new Verifier([{type: 'number'}, {min_length: 1}, {min_value: 5}]);
 
 // final - verify!
-myValueVerifier(value, function (err, isValid, info) {
-    // some code
-});
+myValueVerifier.verify(value, function (err) {
 
+    if (err instanceof Verifier.ValidationError) {
+        // invalid!!!!
+        console.log(err.ruleName);
+        console.log(err.ruleParams);
+        console.log(err.index);
+        return;
+    }
+
+    // valid!!!
+});
 ```
 
 ## Rules:
@@ -31,13 +36,17 @@ for array item validation
 params - rules for verify
 
 ```js
+var myValueVerifier = new Verifier({each: ['type number', 'min_length 1', 'min_value 5']});
 
-var myValueVerifier = myVerifier({each: ['type number', 'min_length 1', 'min_value 5']});
-
-myValueVerifier( [ 5, 3 ], function (err, isValid, info) {
-
+myValueVerifier.verify( [ 5, 3 ], function (err) {
+    console.log(err); // null
 });
 
+myValueVerifier.verify( [ 3, "5" ], function (err) {
+    console.log(err.ruleName); // 'type'
+    console.log(err.ruleParams); // 'number'
+    console.log(err.index); // 1
+});
 ```
 
 ### email

@@ -1,6 +1,6 @@
 "use strict";
 
-var tester = require('../lib/tester');
+var tester = require('./_lib/tester');
 
 exports.examples = tester([
 	{ rules: 'format 3',   value: 4,      expect: false },

@@ -1,24 +1,30 @@
 "use strict";
 
-var _ = require('lodash');
+var _ = require('./../lib/utils');
 var Rule = require('./base/rule');
-var parseRules = require('../lib/parse-rules');
-var verify = require('../lib/verify');
 
-var NotRule = Rule.add('not', {
-	test: function (value, params, options, done) {
-		verify(params, options, value, function (err, isValid, info) {
-			done(err, !isValid);
+module.exports = Rule.extend({
+	test: function (value, verifier, done) {
+		var that = this;
+		verifier.verify(value, function (err) {
+			if (err instanceof Rule.ValidationError) {
+				done(null, true);
+				return;
+			}
+
+			done(new Rule.ValidationError(that.name, that._errorParams));
 		});
 	},
 
-	checkParams: function (params) {
-		return params.error;
-	},
-
 	prepareParams: function (params) {
-		return parseRules(NotRule, params, Rule.options);
+		if (_.isEmpty(params)) {
+			throw new Error('param validation must be specified');
+		}
+
+		var verifier = new Rule.Verifier(params);
+
+		this._errorParams = verifier.serializeRules();
+
+		return verifier;
 	}
 });
-
-module.exports = NotRule;

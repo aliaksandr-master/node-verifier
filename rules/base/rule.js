@@ -26,7 +26,7 @@ Rule.prototype = {
 
 		var obj = {};
 		obj[err.ruleName] = err.ruleParams;
-		index = index == null ? err.arrayItemIndex : index;
+		index = index == null ? err.index : index;
 		return new Rule.ValidationError(this._$ruleName, obj, index);
 	}
 };
@@ -88,9 +88,9 @@ Rule.create = function (name, params) {
 	return new CustomRule(params);
 };
 
-var ValidationError = function ValidationError (ruleName, ruleParams, arrayItemIndex) {
+var ValidationError = function ValidationError (ruleName, ruleParams, index) {
 	if (!(this instanceof ValidationError)) {
-		return new ValidationError(ruleName, ruleParams, arrayItemIndex);
+		return new ValidationError(ruleName, ruleParams, index);
 	}
 
 	if (!ruleName || typeof ruleName !== 'string') {
@@ -102,7 +102,7 @@ var ValidationError = function ValidationError (ruleName, ruleParams, arrayItemI
 
 	this.ruleName = ruleName;
 	this.ruleParams = _.cloneDeep(ruleParams);
-	this.arrayItemIndex = typeof arrayItemIndex === 'number' && !_.isNaN(arrayItemIndex) ? arrayItemIndex : null;
+	this.index = typeof index === 'number' && !_.isNaN(index) ? index : null;
 
 	return this;
 };

@@ -72,6 +72,7 @@ Verifier.prototype = {
 };
 
 Verifier.Rule = Rule;
+Verifier.ValidationError = Rule.ValidationError;
 
 Rule.Verifier = Verifier;
 

@@ -6,44 +6,56 @@ var iterate = require('./lib/iterate');
 var tryRuleTest = require('./lib/tryRuleTest');
 var Rule = require('./rules/base/rule');
 
-var Verifier = function Verifier (validations) {
+var Verifier = function Verifier (rules) {
 	if (!(this instanceof Verifier)) {
-		return new Verifier(validations);
+		return new Verifier(rules);
 	}
 
-	this.validations = this.parse(validations);
+	this.rules = this.parseRules(rules);
 };
 
 Verifier.prototype = {
-	parse: function  (validations) {
-		if (!_.isArray(validations)) {
-			validations = [validations];
+	serializeRules: function () {
+		return _.map(this.rules, function (rule) {
+			var obj = {};
+
+			obj[rule.name] = rule.params instanceof Verifier ? rule.params.serializeRules() : _.cloneDeep(rule.params);
+
+			return obj;
+		});
+	},
+
+	parseRules: function  (rules) {
+		if (!_.isArray(rules)) {
+			rules = [rules];
 		}
 
-		return _.map(validations, function (validation) {
-			if (typeof validation === 'string') {
-				return this._parseString(validation);
+		return _.map(rules, function (rule) {
+			if (typeof rule === 'string') {
+				return this._parseString(rule);
 			}
-			if (_.isPlainObject(validation)) {
-				return this._parseObject(validation);
+
+			if (_.isPlainObject(rule)) {
+				return this._parseObject(rule);
 			}
+
 			throw new Error('invalid rule type, must be string or plain object');
 		}, this);
 	},
 
 	verify: function (value, done) {
-		iterate.array(this.validations, function (rule, index, done) {
+		iterate.array(this.rules, function (rule, index, done) {
 			tryRuleTest(Verifier.Rule.ValidationError, rule, value, done);
 		}, done);
 	},
 
 	_RULE_STRING_FORMAT: /^\s*([a-zA-Z_][a-zA-Z0-9_]*)(.*)$/,
 
-	_parseString: function (validation) {
+	_parseString: function (rule) {
 		var name,
 			params = '';
 
-		validation.replace(this._RULE_STRING_FORMAT, function (w, _name, _params) {
+		rule.replace(this._RULE_STRING_FORMAT, function (w, _name, _params) {
 			name = _name;
 			params = _params.trim();
 		});
@@ -65,9 +77,9 @@ Verifier.prototype = {
 		return json;
 	},
 
-	_parseObject: function (validation) {
-		var name = _.firstElement(validation);
-		return Rule.create(name, validation[name]);
+	_parseObject: function (rule) {
+		var name = _.firstElement(rule);
+		return Rule.create(name, rule[name]);
 	}
 };
 

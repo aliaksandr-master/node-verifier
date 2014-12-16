@@ -5,13 +5,14 @@ var Rule = require('./base/rule');
 
 module.exports = Rule.extend({
 	test: function (value, verifier, done) {
+		var that = this;
 		verifier.verify(value, function (err) {
 			if (err instanceof Rule.ValidationError) {
 				done(null, true);
 				return;
 			}
 
-			done(err, false);
+			done(new Rule.ValidationError(that.name, that._errorParams));
 		});
 	},
 
@@ -20,6 +21,10 @@ module.exports = Rule.extend({
 			throw new Error('param validation must be specified');
 		}
 
-		return new Rule.Verifier(params);
+		var verifier = new Rule.Verifier(params);
+
+		this._errorParams = verifier.serializeRules();
+
+		return verifier;
 	}
 });

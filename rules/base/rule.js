@@ -4,6 +4,7 @@ var _ = require('./../../lib/utils');
 var extend = require('./../../lib/extend');
 
 var Rule = function ValidationRule (params) {
+	this.name = this._$ruleName;
 	this.params = this.prepareParams(params);
 };
 
@@ -21,13 +22,13 @@ Rule.prototype = {
 
 	convertNestedError: function (err, index) {
 		if (!(err instanceof Rule.ValidationError)) {
-			return new Error('errorProxy: argument error must be instance of Rule.ValidationError in rule "' + this._$ruleName + '"');
+			return new Error('errorProxy: argument error must be instance of Rule.ValidationError in rule "' + this.name + '"');
 		}
 
 		var obj = {};
 		obj[err.ruleName] = err.ruleParams;
 		index = index == null ? err.index : index;
-		return new Rule.ValidationError(this._$ruleName, obj, index);
+		return new Rule.ValidationError(this.name, obj, index);
 	}
 };
 
@@ -37,6 +38,10 @@ Rule.extend = function (proto) {
 	var CustomRule = extend(function CustomRule () {
 		Parent.apply(this, arguments);
 	}, Parent);
+
+	if (proto.name != null) {
+		throw new Error('you cant set name in prototype');
+	}
 
 	_.extend(CustomRule.prototype, proto);
 

@@ -4,24 +4,25 @@ var _ = require('./../lib/utils');
 var Rule = require('./base/rule');
 var iterate = require('./../lib/iterate');
 
-module.exports = Rule.extend({
+var RuleEach = module.exports = Rule.extend({
 	test: function (value, verifier, done) {
+		var that = this;
 		if (!_.isArray(value)) {
 			return false;
 		}
 
-		iterate.array(value, function (itermValue, index, done) {
-			verifier.verify(value, function (err) {
+		iterate.array(value, function (itemValue, index, done) {
+			verifier.verify(itemValue, function (err) {
 				if (err instanceof Rule.ValidationError) {
-					done(null, false, index);
+					done(that.convertNestedError(err, index));
 					return;
 				}
 
-				done(err, true);
+				done(err);
 			});
-		}, done);
-
-
+		}, function (err) {
+			done(err, !err);
+		});
 	},
 
 	prepareParams: function (params) {
@@ -29,6 +30,6 @@ module.exports = Rule.extend({
 			throw new Error('param validation must be specified');
 		}
 
-		return new Rule.Verfier(params);
+		return new Rule.Verifier(params);
 	}
 });

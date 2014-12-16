@@ -18,6 +18,17 @@ Rule.prototype = {
 	test: function (value, params, done) {
 		done(new Error('method test must be defined in validation rule "' + this.name + '"!'));
 	},
+
+	convertNestedError: function (err, index) {
+		if (!(err instanceof Rule.ValidationError)) {
+			return new Error('errorProxy: argument error must be instance of Rule.ValidationError in rule "' + this._$ruleName + '"');
+		}
+
+		var obj = {};
+		obj[err.ruleName] = err.ruleParams;
+		index = index == null ? err.arrayItemIndex : index;
+		return new Rule.ValidationError(this._$ruleName, obj, index);
+	}
 };
 
 Rule.extend = function (proto) {

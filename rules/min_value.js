@@ -5,29 +5,14 @@ var Rule = require('./base/rule');
 
 module.exports = Rule.extend({
 	test: function (value, params, done) {
-		if (_.isString(value)) {
-			var num = Number(value);
-			if ((num != value || _.isNaN(num))) { // jshint ignore:line
-				return false;
-			}
-		}
-
-		if (!_.isNumber(value) || _.isNaN(value)) {
-			return false;
-		}
-
-		return Number(value) >= Number(params);
+		value = parseFloat(value);
+		return value == +value && value >= params; // jshint ignore: line
 	},
 
 	prepareParams: function (param) {
-		if (_.isString(param)) {
-			var num = Number(param);
-			if ((num == param && !_.isNaN(num))) { // jshint ignore:line
-				return param;
-			}
-		}
+		param = parseFloat(param);
 
-		if (_.isNumber(param) && !_.isNaN(param)) {
+		if (param == +param) { // jshint ignore: line
 			return param;
 		}
 

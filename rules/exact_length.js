@@ -5,25 +5,24 @@ var Rule = require('./base/rule');
 
 module.exports = Rule.extend({
 	test: function (value, params, done) {
-		if (!_.isArray(value) && !_.isString(value) && !(_.isNumber(value) && !_.isNaN(value))) {
-			return false;
+		if (_.isNumber(value) && !_.isNaN(value)) {
+			value = String(value);
 		}
 
-		return (_.isArray(value) ? value : String(value)).length === Number(params);
+		if (_.isArray(value) || _.isString(value)) {
+			return value.length === params;
+		}
+
+		return false;
 	},
 
 	prepareParams: function (params) {
-		if (_.isString(params)) {
-			var num = Number(params);
-			if ((num == params  && num >= 0)) { // jshint ignore: line
-				return params;
-			}
-		}
+		params = parseFloat(params);
 
-		if (_.isNumber(params) && params >= 0) {
+		if (params == +params && params >= 0) { // jshint ignore: line
 			return params;
 		}
 
-		throw new Error('must be Number >= 0');
+		throw new Error('rule params must be Number >= 0');
 	}
 });

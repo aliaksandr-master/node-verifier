@@ -73,7 +73,7 @@ Verifier.prototype = {
 
 Verifier.Rule = Rule;
 
-Rule.Verfier = Verifier;
+Rule.Verifier = Verifier;
 
 Rule.add('exact_length', require('./rules/exact_length'));
 Rule.add('max_length', require('./rules/max_length'));
@@ -86,7 +86,7 @@ Rule.add('max_value', require('./rules/max_value'));
 Rule.add('min_value', require('./rules/min_value'));
 Rule.add('eq', require('./rules/eq'));
 Rule.add('required', require('./rules/required'));
-Rule.add('not', require('./rules/not'));
 Rule.add('each', require('./rules/each'));
+Rule.add('not', require('./rules/not'));
 
 module.exports = Verifier;

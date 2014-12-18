@@ -24,8 +24,8 @@ myValueVerifier.verify(value, function (err) {
 
     if (err instanceof Verifier.ValidationError) {
         // invalid!!!!
-        console.log(err.ruleName);
-        console.log(err.ruleParams);
+        console.log(err.rule);
+        console.log(err.params);
         console.log(err.index);
         return;
     }
@@ -49,8 +49,8 @@ myValueVerifier.verify( [ 5, 3 ], function (err) {
 });
 
 myValueVerifier.verify( [ 3, "5" ], function (err) {
-    console.log(err.ruleName); // 'type'
-    console.log(err.ruleParams); // 'number'
+    console.log(err.rule); // 'type'
+    console.log(err.params); // 'number'
     console.log(err.index); // 1
 });
 ```

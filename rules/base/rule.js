@@ -3,26 +3,64 @@
 var _ = require('./../../lib/utils');
 var extend = require('./../../lib/extend');
 
-var Rule = function ValidationRule (params) {
+/**
+ * abstract class Rule. All rules must extends this Class
+ *
+ * @abstract
+ * @class Rule
+ * @constructor
+ * @property {String} name
+ * @property {String} _$ruleName - private
+ * @property {*} params
+ *
+ * @this Rule
+ * */
+var Rule = function Rule (params) {
 	this.name = this._$ruleName;
 	this.params = this.prepareParams(params);
 };
 
 Rule.prototype = {
-
-	params: null,
-
+	/**
+	 * method for prepare params in construct. this method provides fail-fast paradigm
+	 *
+	 * @method
+	 * @protected
+	 * @this Rule
+	 * @param {?*} params
+	 * @returns {?*}
+	 * */
 	prepareParams: function (params) {
 		return params == null ? null : params;
 	},
 
+	/**
+	 * method for call value verify of this rule
+	 *
+	 * @abstract
+	 * @public
+	 * @method
+	 * @param {?*} value
+	 * @param {?*} params
+	 * @param {verifyCallback} done
+	 *
+	 * */
 	test: function (value, params, done) {
 		done(new Error('method test must be defined in validation rule "' + this.name + '"!'));
 	},
 
+	/**
+	 * proxy error helper
+	 *
+	 * @method
+	 * @param {Rule.ValidationError} err
+	 * @param {?Number} index
+	 *
+	 * return Rule.ValidationError
+	 * */
 	convertNestedError: function (err, index) {
 		if (!(err instanceof Rule.ValidationError)) {
-			return new Error('errorProxy: argument error must be instance of Rule.ValidationError in rule "' + this.name + '"');
+			return new Error('argument error must be instance of Rule.ValidationError in rule "' + this.name + '"');
 		}
 
 		var obj = {};
@@ -32,46 +70,78 @@ Rule.prototype = {
 	}
 };
 
-Rule.extend = function (proto) {
+/**
+ * Extend Rule class
+ *
+ * @static
+ * @method
+ * @param {?Object} protoProps
+ *
+ * return {Function} ChildRule
+ * */
+Rule.extend = function (protoProps) {
 	var Parent = this;
 
 	var CustomRule = extend(function CustomRule () {
 		Parent.apply(this, arguments);
 	}, Parent);
 
-	if (proto.name != null) {
+	if (protoProps.name != null) {
 		throw new Error('you cant set name in prototype');
 	}
 
-	_.extend(CustomRule.prototype, proto);
+	_.extend(CustomRule.prototype, protoProps);
 
 	CustomRule.__super__ = Parent.prototype;
+	CustomRule.extend = Parent.extend;
 
 	return CustomRule;
 };
 
+
+/**
+ * {Rule{}}
+ * */
 Rule.rules = {};
 
-Rule.add = function (name, rule, strict) {
+/**
+ * Register rule
+ *
+ * @static
+ * @method
+ * @param {!String} name
+ * @param {Function} ChildRuleConstructor - Class that extended Rule
+ * @param {?Boolean} [strict=true] - If true - deny replacement register
+ *
+ * */
+Rule.add = function (name, ChildRuleConstructor, strict) {
 	if (!name || typeof name !== 'string') {
 		throw new Error('rule name must be non-empty string');
-	}
-
-	if (!_.isFunction(rule) || rule.prototype.hasOwnProperty('_$ruleName') || !rule.prototype.test) {
-		throw new Error('rule "' + name + '" must be constructor (with method test), and can register only once');
 	}
 
 	if ((strict == null || strict) && this.rules.hasOwnProperty(name)) {
 		throw new Error('rule "' + name + '" already registered');
 	}
 
-	rule.prototype._$ruleName = name;
+	if (!_.isFunction(ChildRuleConstructor) || !ChildRuleConstructor.prototype.test || !ChildRuleConstructor.extend) {
+		throw new Error('rule "' + name + '" must be constructor (with method test), and can register only once');
+	}
 
-	this.rules[name] = rule;
-
-	return rule;
+	this.rules[name] = ChildRuleConstructor.extend({
+		_$ruleName: name
+	});
 };
 
+/**
+ * Register rule
+ *
+ * @static
+ * @method
+ * @param {!String} name
+ * @param {?Boolean} [strict=true] - If true throws Error about non-exists rule
+ *
+ * @returns {Function}
+ * */
 Rule.get = function (name, strict) {
 	if (!name || typeof name !== 'string') {
 		throw new Error('rule name must be non-empty string');
@@ -88,14 +158,38 @@ Rule.get = function (name, strict) {
 	return null;
 };
 
+/**
+ * create instance of Rule
+ *
+ * @param {String} name
+ * @param {*} params
+ *
+ * @returns {Rule}
+ * */
 Rule.create = function (name, params) {
-	var CustomRule = this.get(name);
-	return new CustomRule(params);
+	var Rule = this.get(name);
+	return new Rule(params);
 };
 
-var ValidationError = function ValidationError (ruleName, ruleParams, index) {
-	if (!(this instanceof ValidationError)) {
-		return new ValidationError(ruleName, ruleParams, index);
+
+/**
+ * Register rule
+ *
+ * @static
+ * @class
+ * @constructor
+ * @param {!String} ruleName
+ * @param {*} ruleParams
+ * @param {?Number} [index]
+ * @property {String} name="ValidationError"
+ * @property {*} params
+ * @property {?Number} index
+ *
+ * @returns {Rule.ValidationError}
+ * */
+Rule.ValidationError = function ValidationError (ruleName, ruleParams, index) {
+	if (!(this instanceof Rule.ValidationError)) {
+		return new Rule.ValidationError(ruleName, ruleParams, index);
 	}
 
 	if (!ruleName || typeof ruleName !== 'string') {
@@ -103,18 +197,14 @@ var ValidationError = function ValidationError (ruleName, ruleParams, index) {
 	}
 
 	Error.call(this);
-	this.type = this.name = 'ValidationError';
-
-	this.ruleName = ruleName;
-	this.ruleParams = _.cloneDeep(ruleParams);
+	this.name = 'ValidationError';
+	this.rule = ruleName;
+	this.params = _.cloneDeep(ruleParams);
 	this.index = typeof index === 'number' && !_.isNaN(index) ? index : null;
 
 	return this;
 };
 
-extend(ValidationError, Error);
-
-Rule.ValidationError = ValidationError;
+extend(Rule.ValidationError, Error);
 
 module.exports = Rule;
-

@@ -4,7 +4,7 @@ var _ = require('./../lib/utils');
 var Rule = require('./base/rule');
 
 module.exports = Rule.extend({
-	test: function (value, verifier, done) {
+	check: function (value, verifier, done) {
 		var that = this;
 		verifier.verify(value, function (err) {
 			if (err instanceof Rule.ValidationError) {

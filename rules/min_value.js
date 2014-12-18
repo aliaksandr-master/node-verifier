@@ -4,7 +4,7 @@ var _ = require('./../lib/utils');
 var Rule = require('./base/rule');
 
 module.exports = Rule.extend({
-	test: function (value, params, done) {
+	check: function (value, params, done) {
 		value = parseFloat(value);
 		return value == +value && value >= params; // jshint ignore: line
 	},

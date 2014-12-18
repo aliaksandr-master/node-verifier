@@ -5,7 +5,7 @@ var Rule = require('./base/rule');
 var iterate = require('./../lib/iterate');
 
 var RuleEach = module.exports = Rule.extend({
-	test: function (value, verifier, done) {
+	check: function (value, verifier, done) {
 		var that = this;
 		if (!_.isArray(value)) {
 			return false;

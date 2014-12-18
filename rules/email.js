@@ -5,7 +5,7 @@ var Rule = require('./base/rule');
 var isEmail = require("email-validator");
 
 module.exports = Rule.extend({
-	test: function (value, params, done) {
+	check: function (value, params, done) {
 		if (!_.isString(value)) {
 			return false;
 		}

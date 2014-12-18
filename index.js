@@ -143,7 +143,7 @@ Verifier.prototype = {
 	 * @returns Rule
 	 * */
 	_parseObject: function (ruleObject) {
-		var name = _.firstElement(ruleObject);
+		var name = _.firstKey(ruleObject);
 		return Rule.create(name, ruleObject[name]);
 	}
 };

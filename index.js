@@ -6,6 +6,14 @@ var iterate = require('./lib/iterate');
 var tryRuleTest = require('./lib/tryRuleTest');
 var Rule = require('./rules/base/rule');
 
+/**
+ * @class Verifier
+ * @constructor
+ * @property {Rule[]} rules - parsed rules for validation
+ *
+ * @this Verifier
+ * @returns Verifier
+ * */
 var Verifier = function Verifier (rules) {
 	if (!(this instanceof Verifier)) {
 		return new Verifier(rules);
@@ -15,6 +23,15 @@ var Verifier = function Verifier (rules) {
 };
 
 Verifier.prototype = {
+	constructor: Verifier,
+
+	/**
+	 * recursive verifier serializer. Returns array of objects {ruleName: ruleParams}
+	 *
+	 * @method
+	 * @this Verifier
+	 * @returns Object[]
+	 * */
 	serializeRules: function () {
 		return _.map(this.rules, function (rule) {
 			var obj = {};
@@ -25,6 +42,14 @@ Verifier.prototype = {
 		});
 	},
 
+	/**
+	 * convert raw rules array to Rule array
+	 *
+	 * @method
+	 * @param {Array|String} rules
+	 * @this Verifier
+	 * @returns Rule[]
+	 * */
 	parseRules: function  (rules) {
 		if (!_.isArray(rules)) {
 			rules = [rules];
@@ -43,6 +68,21 @@ Verifier.prototype = {
 		}, this);
 	},
 
+	/**
+	 * @callback verifyCallback
+	 *
+	 * @param {?Error} [error]
+	 *
+	 * */
+
+	/**
+	 * verify value with async callback
+	 *
+	 * @method
+	 * @param {*} value
+	 * @param {verifyCallback} done
+	 * @this Verifier
+	 * */
 	verify: function (value, done) {
 		iterate.array(this.rules, function (rule, index, done) {
 			tryRuleTest(Verifier.Rule.ValidationError, rule, value, done);
@@ -51,11 +91,19 @@ Verifier.prototype = {
 
 	_RULE_STRING_FORMAT: /^\s*([a-zA-Z_][a-zA-Z0-9_]*)(.*)$/,
 
-	_parseString: function (rule) {
+	/**
+	 * convert string to Rule object
+	 *
+	 * @private
+	 * @method
+	 * @param {String} ruleStr
+	 * @returns {Rule}
+	 * */
+	_parseString: function (ruleStr) {
 		var name,
 			params = '';
 
-		rule.replace(this._RULE_STRING_FORMAT, function (w, _name, _params) {
+		ruleStr.replace(this._RULE_STRING_FORMAT, function (w, _name, _params) {
 			name = _name;
 			params = _params.trim();
 		});
@@ -65,6 +113,14 @@ Verifier.prototype = {
 		return Rule.create(name, params);
 	},
 
+	/**
+	 * parse json params
+	 *
+	 * @private
+	 * @method
+	 * @param {String} jsonSource
+	 * @returns {*}
+	 * */
 	_parseParamsString: function (jsonSource) {
 		var json = null;
 
@@ -77,9 +133,18 @@ Verifier.prototype = {
 		return json;
 	},
 
-	_parseObject: function (rule) {
-		var name = _.firstElement(rule);
-		return Rule.create(name, rule[name]);
+	/**
+	 * convert object {ruleName: ruleParams} to Rule object
+	 *
+	 * @private
+	 * @method
+	 * @param {Object} ruleObject
+	 *
+	 * @returns Rule
+	 * */
+	_parseObject: function (ruleObject) {
+		var name = _.firstElement(ruleObject);
+		return Rule.create(name, ruleObject[name]);
 	}
 };
 

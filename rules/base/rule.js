@@ -45,8 +45,47 @@ Rule.prototype = {
 	 * @param {verifyCallback} done
 	 *
 	 * */
-	test: function (value, params, done) {
-		done(new Error('method test must be defined in validation rule "' + this.name + '"!'));
+	check: function (value, params, done) {
+		done(new Error('method check must be defined in validation rule "' + this.name + '"!'));
+	},
+
+	verify: function (value, done) {
+		var rule = this,
+			_doneCounter = 0;
+		var _done = function (err, isValid, index) {
+			if (_doneCounter++) {
+				console.error('validation rule ' + rule.name + ' call callback ' + _doneCounter + ' times');
+				return;
+			}
+
+			if (err) {
+				done(err);
+				return;
+			}
+
+			if (isValid) {
+				done();
+				return;
+			}
+
+			done(new Rule.ValidationError(rule.name, rule.params, index));
+		};
+
+		var result;
+		try {
+			result = rule.check(value, rule.params, _done);
+		} catch (e) {
+			_done(e);
+		}
+
+		if (result !== undefined) {
+			if (result instanceof Error) {
+				_done(result);
+				return;
+			}
+
+			_done(null, result);
+		}
 	},
 
 	/**
@@ -123,8 +162,8 @@ Rule.add = function (name, ChildRuleConstructor, strict) {
 		throw new Error('rule "' + name + '" already registered');
 	}
 
-	if (!_.isFunction(ChildRuleConstructor) || !ChildRuleConstructor.prototype.test || !ChildRuleConstructor.extend) {
-		throw new Error('rule "' + name + '" must be constructor (with method test), and can register only once');
+	if (!_.isFunction(ChildRuleConstructor) || !ChildRuleConstructor.prototype.check || !ChildRuleConstructor.extend) {
+		throw new Error('rule "' + name + '" must be constructor (with method check)');
 	}
 
 	this.rules[name] = ChildRuleConstructor.extend({

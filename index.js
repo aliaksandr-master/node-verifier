@@ -3,7 +3,6 @@
 var _ = require('./lib/utils');
 
 var iterate = require('./lib/iterate');
-var tryRuleTest = require('./lib/tryRuleTest');
 var Rule = require('./rules/base/rule');
 
 /**
@@ -55,17 +54,18 @@ Verifier.prototype = {
 			rules = [rules];
 		}
 
+		var that = this;
 		return _.map(rules, function (rule) {
 			if (typeof rule === 'string') {
-				return this._parseString(rule);
+				return that._parseString(rule);
 			}
 
 			if (_.isPlainObject(rule)) {
-				return this._parseObject(rule);
+				return that._parseObject(rule);
 			}
 
 			throw new Error('invalid rule type, must be string or plain object');
-		}, this);
+		});
 	},
 
 	/**
@@ -85,7 +85,7 @@ Verifier.prototype = {
 	 * */
 	verify: function (value, done) {
 		iterate.array(this.rules, function (rule, index, done) {
-			tryRuleTest(Verifier.Rule.ValidationError, rule, value, done);
+			rule.verify(value, done);
 		}, done);
 	},
 
@@ -143,7 +143,15 @@ Verifier.prototype = {
 	 * @returns Rule
 	 * */
 	_parseObject: function (ruleObject) {
-		var name = _.firstKey(ruleObject);
+		var name = null;
+
+		for (var k in ruleObject) {
+			if (ruleObject.hasOwnProperty(k)) {
+				name = k;
+				break;
+			}
+		}
+
 		return Rule.create(name, ruleObject[name]);
 	}
 };

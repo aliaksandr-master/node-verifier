@@ -174,5 +174,7 @@ Rule.add('eq', require('./rules/eq'));
 Rule.add('required', require('./rules/required'));
 Rule.add('each', require('./rules/each'));
 Rule.add('not', require('./rules/not'));
+Rule.add('any', require('./rules/any'));
+Rule.add('contains', require('./rules/contains'));
 
 module.exports = Verifier;

@@ -139,37 +139,133 @@ no params
 check value on false, 0, "", null, undefined, [], {}
 
 ### eq
-lodash _.isEqual
+result of _.isEqual (lodash)
+```js
+var myVerifier = new Verifier('eq 5');
+// equal
+var myVerifier = new Verifier({ eq: 5 });
+
+myVerifier.verify(3, callback);  // invalid
+myVerifier.verify("5", callback);  // invalid
+myVerifier.verify(5, callback); // valid
+```
 
 ### exact_length
-for string and arrays
+for string and arrays<br>
+param - number
+```js
+var myVerifier = new Verifier('exact_length 5');
+// equal
+var myVerifier = new Verifier({ exact_length: 5 });
+
+myVerifier.verify("asdasdasd", callback);  // invalid
+myVerifier.verify("asdas", callback); // valid
+```
 
 ### format
-check value on RegExp match
+check value on RegExp match<br>
+param - regExp (string)
+```js
+var myVerifier = new Verifier('format ^[a-zA-Z][a-zA-Z0-9_.-]*@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$');
+// equal
+var myVerifier = new Verifier({format: /^[a-zA-Z][a-zA-Z0-9_.-]*@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/);
+
+myVerifier.verify("asdasdasd@asd.com", callback);  // valid
+myVerifier.verify("asdasdasd@asd", callback); // invalid
+```
 
 ### max_length
 for string and arrays
+```js
+var myVerifier = new Verifier('max_length 3');
+myVerifier.verify(null, callback); // invalid
+myVerifier.verify([1], callback);  // valid
+myVerifier.verify([1, 2, 3], callback); // valid
+myVerifier.verify("123", callback); // valid
+myVerifier.verify(123, callback); // valid (convert to String)
+myVerifier.verify(NaN, callback); // invalid
+```
 
 ### min_length
 for string and arrays
+```js
+var myVerifier = new Verifier('min_length 3');
+myVerifier.verify(null, callback); // invalid
+myVerifier.verify([1], callback);  // invalid
+myVerifier.verify([1, 2, 3], callback); // valid
+myVerifier.verify("123", callback); // valid
+myVerifier.verify(123, callback); // valid (convert to String)
+myVerifier.verify(NaN, callback); // invalid
+```
 
 ### max_value
 check number
+```js
+var myVerifier = new Verifier('max_value 3');
+myVerifier.verify(4, callback); // valid
+myVerifier.verify("4", callback); // valid (convert to float)
+```
 
 ### min_value
-check number
+check number. <br>
+param - number
+```js
+var myVerifier = new Verifier('min_value 3');
+myVerifier.verify(value, callback);
+```
 
 ### not
-params = rule for negation
+params - rule(s) for negation
+```js
+var myVerifier = new Verifier({ not: ['required', 'type number', 'eq 3'] });
+myVerifier.verify(value, callback);
+```
 
 ### required
-check this value on undefined only
+check this value on undefined only. <br>
+params not need.
+```js
+var myVerifier = new Verifier({ required: true});
+// equal
+var myVerifier = new Verifier('required');
+
+myVerifier.verify(value, callback);
+```
 
 ### type
-check on type by Object.prototype.toString.call(value) 
+check on type by Object.prototype.toString.call(value). <br>
+param - type name without '[Object' and ']' in lower case
+```js
+var myVerifier = new Verifier({ type: 'object'});
+// equal
+var myVerifier = new Verifier('type object');
+
+myVerifier.verify(value, callback);
+```
 
 ### any
 True if any verification branch is valid.
+```js
+var myVerifier = new Verifier({
+    any: [
+        ['type string', {contains: ["hello", "world"]}], // branch 1
+        'type number',                                   // branch 2
+    ]
+});
+// Equal
+var myVerifier = new Verifier({
+    any: {
+        branch1: ['type string', {contains: ["hello", "world"]}],
+        branch2: 'type number'                           // branch 2
+    }
+});
+
+myVerifier.verify(value, callback);
+```
 
 ### contains
 True if any item of haystack array is equal with value
+```js
+var myVerifier = new Verifier({contains: [1, 2, 3, 4]});
+myVerifier.verify(value, callback);
+```

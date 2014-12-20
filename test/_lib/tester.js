@@ -3,7 +3,7 @@
 require('colors');
 var _ = require('lodash');
 var Verifier = require('../../index');
-var iterate = require('../../lib/iterate');
+var async = require('async');
 
 var inspect = function (value) {
 	return '\n' + require('util').inspect(value, {depth: null, colors: true}) + '\n';
@@ -11,7 +11,7 @@ var inspect = function (value) {
 
 var tester = function (cases) {
 	return function (test) {
-		iterate.array(cases, function (testCase, index, done) {
+		async.each(cases, function (testCase, done) {
 			var verifier;
 			try {
 				verifier = new Verifier(testCase.rules);
@@ -35,7 +35,7 @@ var tester = function (cases) {
 						return;
 					}
 
-					console.log('#' + index + ' unexpected error Error('.red, err instanceof Error, ') \n>>'.red, err, '\n', inspect(testCase).cyan);
+					console.log('unexpected error Error('.red, err instanceof Error, ') \n>>'.red, err, '\n', inspect(testCase).cyan);
 					return done(err);
 				}
 

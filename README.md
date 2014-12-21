@@ -2,6 +2,7 @@
 [![npm](http://img.shields.io/npm/l/node-verifier.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 [![Dependency Status](https://david-dm.org/aliaksandr-pasynkau/node-verifier.svg?style=flat-square)](https://david-dm.org/aliaksandr-pasynkau/node-verifier)
 [![devDependency Status](https://david-dm.org/aliaksandr-pasynkau/node-verifier/dev-status.svg?style=flat-square)](https://david-dm.org/aliaksandr-pasynkau/node-verifier#info=devDependencies)
+[![Build Status](https://travis-ci.org/aliaksandr-pasynkau/node-verifier.svg?branch=master&style=flat-square)](https://travis-ci.org/aliaksandr-pasynkau/node-verifier)
 
 
 node-verifier

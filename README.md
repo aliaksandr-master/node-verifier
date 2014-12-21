@@ -3,7 +3,7 @@
 [![Dependency Status](https://david-dm.org/aliaksandr-pasynkau/node-verifier.svg?style=flat-square)](https://david-dm.org/aliaksandr-pasynkau/node-verifier)
 [![devDependency Status](https://david-dm.org/aliaksandr-pasynkau/node-verifier/dev-status.svg?style=flat-square)](https://david-dm.org/aliaksandr-pasynkau/node-verifier#info=devDependencies)
 [![Build Status](https://travis-ci.org/aliaksandr-pasynkau/node-verifier.svg?branch=master&style=flat-square)](https://travis-ci.org/aliaksandr-pasynkau/node-verifier)
-
+[![Coverage Status](https://img.shields.io/coveralls/aliaksandr-pasynkau/node-verifier.svg?style=flat-square)](https://coveralls.io/r/aliaksandr-pasynkau/node-verifier?branch=master)
 
 node-verifier
 =============

@@ -22,5 +22,5 @@ exports.examples = tester([
 	{ rules: 'email', value: "the-total-length@of-an-entire-address.cannot-be-longer-than-two-hundred-and-fifty-four-characters.and-this-address-is-254-characters-exactly.so-it-should-be-valid.and-im-going-to-add-some-more-words-here.to-increase-the-lenght-blah-blah-blah-blah-bla.org", expect: true },
 	{ rules: 'email', value: "the-character-limit@for-each-part.of-the-domain.is-sixty-three-characters.this-is-exactly-sixty-three-characters-so-it-is-valid-blah-blah.com", expect: true },
 	{ rules: 'email', value: "local@sub.domains.com", expect: true },
-	{ rules: 'email', value: "backticks`are`legit@test.com", expect: true }
+	{ rules: 'email', value: "backticks`are`legit@tests.com", expect: true }
 ]);

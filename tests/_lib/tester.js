@@ -2,7 +2,7 @@
 
 require('colors');
 var _ = require('lodash');
-var Verifier = require('../../index');
+var Verifier = require('./lib');
 var async = require('async');
 
 var inspect = function (value) {

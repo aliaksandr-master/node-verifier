@@ -1,6 +1,6 @@
 "use strict";
 
-var ValidationError = require('../index').Rule.ValidationError;
+var ValidationError = require('./_lib/lib').Rule.ValidationError;
 module.exports = {
 	'instance of Error': function (test) {
 		var err1 = new Error('12123');

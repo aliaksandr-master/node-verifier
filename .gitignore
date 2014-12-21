@@ -13,6 +13,9 @@
 # package managers
 /npm-debug.log
 
-
 # compile files
 /node_modules
+/lib-cov
+
+# other
+.coveralls.yml

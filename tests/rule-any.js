@@ -1,6 +1,7 @@
 "use strict";
 
 var tester = require('./_lib/tester');
+var Verifier = require('./_lib/lib');
 
 exports.examples = tester([
 	{
@@ -75,3 +76,22 @@ exports.examples = tester([
 		expect: false
 	}
 ]);
+
+exports['check params'] = function (test) {
+
+	test.throws(function () {
+		var verifier = new Verifier({any: [1, 2]});
+	});
+
+	test.throws(function () {
+		var verifier = new Verifier('any a');
+	});
+
+	var verifier = new Verifier({'any': null});
+
+	verifier.verify(123, function (err) {
+		test.ok(!err);
+		test.done(err);
+	});
+
+};

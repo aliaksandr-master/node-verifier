@@ -1,6 +1,7 @@
 "use strict";
 
 var tester = require('./_lib/tester');
+var Verifier = require('./_lib/lib');
 
 exports.examples = tester([
 	{ rules: 'type string', value: 4,               expect: false },
@@ -123,3 +124,11 @@ exports.examples = tester([
 	{ rules: 'type Date',   value: function () {},  expect: false },
 	{ rules: 'type Date',   value: new Date(),      expect: true  }
 ]);
+
+exports['check params'] = function (test) {
+	test.throws(function () {
+		var verifier = new Verifier({type: null});
+	});
+
+	test.done();
+};

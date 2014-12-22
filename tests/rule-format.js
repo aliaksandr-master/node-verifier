@@ -1,6 +1,7 @@
 "use strict";
 
 var tester = require('./_lib/tester');
+var Verifier = require('./_lib/lib');
 
 exports.examples = tester([
 	{ rules: 'format 3',   value: 4,      expect: false },
@@ -14,3 +15,20 @@ exports.examples = tester([
 	{ rules: 'format ^[a-zA-Z][a-zA-Z0-9_.-]*@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$', value: "asdasdasd",     expect: false },
 	{ rules: 'format ^[a-zA-Z][a-zA-Z0-9_.-]*@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$', value: "asdasdasd@asd.com",     expect: true },
 ]);
+
+exports['check params'] = function (test) {
+
+	test.throws(function () {
+		var verifier = new Verifier({format: null});
+	});
+
+	test.throws(function () {
+		var verifier = new Verifier({format: {}});
+	});
+
+	test.throws(function () {
+		var verifier = new Verifier({format: parseInt("asdasd")});
+	});
+
+	test.done();
+};

@@ -26,21 +26,39 @@ var tester = function (cases) {
 				return;
 			}
 
+			if (testCase.error) {
+				console.log('must be error!');
+				done('must be error!');
+				return;
+			}
+
 			verifier.verify(testCase.value, function (err) {
 				var isValid = !err;
 				if (err) {
-					if (testCase.expect != null && !testCase.expect && err instanceof Verifier.Rule.ValidationError) {
-						test.ok(true);
+					if (err instanceof Verifier.Rule.ValidationError) {
+						if (testCase.expect) {
+							console.log('validation-error >> ', inspect(err));
+						}
+
+						test.ok(!testCase.expect);
+
+						if (testCase.verr) {
+							_.each(testCase.verr, function (v, k) {
+								test.ok(_.isEqual(err[k], v), 'must be equal:'+inspect(v)+'<<and>>'+inspect(err[k]));
+							});
+						}
+
 						done();
 						return;
 					}
 
 					console.log('unexpected error Error('.red, err instanceof Error, ') \n>>'.red, err, '\n', inspect(testCase).cyan);
-					return done(err);
+					done(err);
+					return;
 				}
 
-				test.equal(isValid, testCase.expect, testCase.message || inspect(testCase));
-				done();
+				test.ok(isValid);
+				done(err);
 			});
 		}, test.done);
 	};

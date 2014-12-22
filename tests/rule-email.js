@@ -3,6 +3,7 @@
 var tester = require('./_lib/tester');
 
 exports.examples = tester([
+	{ rules: 'email', value: 1123, expect: false },
 	{ rules: 'email', value: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@letters-in-local.org", expect: true },
 	{ rules: 'email', value: "01234567890@numbers-in-local.net", expect: true },
 	{ rules: 'email', value: "&'*+-./=?^_{}~@other-valid-characters-in-local.net", expect: true },

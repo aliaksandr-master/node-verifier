@@ -11,8 +11,8 @@ exports.examples = tester([
 	{ rules: 'min_length 3', value: {}, expect: false },
 	{ rules: 'min_length 3', value: [], expect: false },
 	{ rules: 'min_length 3', value: function () {}, expect: false },
-	{ rules: 'min_length -2', value: '', expect: false, error: true },
-	{ rules: 'min_length -2', value: 'asdasd', expect: false, error: true },
+	{ rules: 'min_length -2', value: '', error: 'RMINLENGTH1' },
+	{ rules: 'min_length -2', value: 'asdasd', error: 'RMINLENGTH1' },
 	{ rules: 'min_length 0',  value: '', expect: true },
 	{ rules: 'min_length 0',  value: '123123', expect: true }
 ]);

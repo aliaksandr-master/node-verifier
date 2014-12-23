@@ -17,6 +17,15 @@ var tester = function (cases) {
 				verifier = new Verifier(testCase.rules);
 			} catch (e) {
 				if (testCase.error) {
+					if (typeof testCase.error === 'string') {
+						var r = e.message.indexOf('#' + testCase.error + ': ') === 0;
+
+						if (!r) {
+							console.error(('must be error! #'+testCase.error + ' -> given "' + e.message + '"').red);
+						}
+
+						test.ok(r);
+					}
 					test.ok(true);
 					done();
 					return;
@@ -27,7 +36,7 @@ var tester = function (cases) {
 			}
 
 			if (testCase.error) {
-				console.log('must be error!');
+				console.log('must be error! ' + testCase.error);
 				done('must be error!');
 				return;
 			}

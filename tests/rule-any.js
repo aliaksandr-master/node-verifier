@@ -17,7 +17,10 @@ exports.examples = tester([
 			]
 		},
 		value: 333,
-		expect: false
+		verr: {
+			rule: 'any',
+			params: [[{type: 'object'}], [{type: 'string'}]]
+		}
 	},
 	{
 		rules: {
@@ -27,7 +30,10 @@ exports.examples = tester([
 			}
 		},
 		value: 333,
-		expect: false
+		verr: {
+			rule: 'any',
+			params: [[{type: 'object'}], [{type: 'string'}]]
+		}
 	},
 	{
 		rules: {
@@ -48,7 +54,11 @@ exports.examples = tester([
 			}
 		},
 		value: "123",
-		expect: false
+		expect: false,
+		verr: {
+			rule: 'any',
+			params: [[{eq: 123}], [{eq: 234}], [{eq: 345}]]
+		}
 	},
 	{
 		rules: {
@@ -73,12 +83,15 @@ exports.examples = tester([
 			any: [ { eq: 123 }, { eq: 234 }, { eq: 345 } ]
 		},
 		value: 120,
-		expect: false
+		expect: false,
+		verr: {
+			rule: 'any',
+			params: [[{eq: 123}], [{eq: 234}], [{eq: 345}]]
+		}
 	}
 ]);
 
 exports['check params'] = function (test) {
-
 	test.throws(function () {
 		var verifier = new Verifier({any: [1, 2]});
 	});
@@ -93,5 +106,4 @@ exports['check params'] = function (test) {
 		test.ok(!err);
 		test.done(err);
 	});
-
 };

@@ -31,17 +31,14 @@ module.exports = {
 
 	'throws error if incorrect rule name': function (test) {
 
-		test.throws(function () {
-			var err = new ValidationError();
-		});
+		var e1 = new ValidationError();
+		test.ok(e1 instanceof Error && !(e1 instanceof ValidationError) && /^#E1: /.test(e1.message));
 
-		test.throws(function () {
-			var err = new ValidationError(123123);
-		});
+		var e2 = new ValidationError(123123);
+		test.ok(e2 instanceof Error && !(e2 instanceof ValidationError) && /^#E1: /.test(e2.message));
 
-		test.throws(function () {
-			var err = new ValidationError({});
-		});
+		var e3 = new ValidationError({});
+		test.ok(e3 instanceof Error && !(e3 instanceof ValidationError) && /^#E1: /.test(e3.message));
 
 		test.done();
 	}

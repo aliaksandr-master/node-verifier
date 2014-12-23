@@ -15,7 +15,10 @@ exports.examples = tester([
 			contains: [123, 234, 345]
 		},
 		value: 333,
-		expect: false
+		verr: {
+			rule: 'contains',
+			params: [123, 234, 345]
+		}
 	},
 	{
 		rules: {
@@ -29,6 +32,9 @@ exports.examples = tester([
 			contains: [123, 234, 345]
 		},
 		value: "123",
-		expect: false
+		verr: {
+			rule: 'contains',
+			params: [123, 234, 345]
+		}
 	}
 ]);

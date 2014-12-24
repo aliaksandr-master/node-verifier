@@ -6,7 +6,11 @@ exports.examples = tester([
 	{
 		rules: 'max_value 3',
 		value: 33,
-		expect: false
+		verr: {
+			rule: 'max_value',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'max_value 33',
@@ -21,7 +25,11 @@ exports.examples = tester([
 	{
 		rules: 'max_value "3"',
 		value: 33,
-		expect: false
+		verr: {
+			rule: 'max_value',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'max_value "33"',
@@ -36,7 +44,11 @@ exports.examples = tester([
 	{
 		rules: 'max_value 3',
 		value: "33",
-		expect: false
+		verr: {
+			rule: 'max_value',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'max_value 33',
@@ -51,7 +63,11 @@ exports.examples = tester([
 	{
 		rules: 'max_value "3"',
 		value: "33",
-		expect: false
+		verr: {
+			rule: 'max_value',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'max_value "33"',
@@ -66,17 +82,29 @@ exports.examples = tester([
 	{
 		rules: 'max_value "333"',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'max_value',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'max_value 333',
 		value: NaN,
-		expect: false
+		verr: {
+			rule: 'max_value',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'max_value "333"',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'max_value',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'max_value null',

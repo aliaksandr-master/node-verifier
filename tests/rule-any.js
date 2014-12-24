@@ -107,3 +107,27 @@ exports['check params'] = function (test) {
 		test.done(err);
 	});
 };
+
+exports['check error'] = function (test) {
+	var error = new Error('qweqwe');
+
+	var MySuperRule = Verifier.Rule.extend({
+		check: function () {
+			return error;
+		}
+	});
+
+	Verifier.Rule.add('mySuperRule', MySuperRule);
+
+	var verifier = new Verifier({
+		'any': [
+			[{ type: 'object'}],
+			[{ mySuperRule: '123123'}]
+		]
+	});
+
+	verifier.verify(123, function (err) {
+		test.ok(err === error);
+		test.done();
+	});
+};

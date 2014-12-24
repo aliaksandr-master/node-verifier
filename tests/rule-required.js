@@ -36,7 +36,11 @@ exports.examples = tester([
 	{
 		rules: 'required',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'required',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'required',

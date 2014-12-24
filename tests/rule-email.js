@@ -6,7 +6,11 @@ exports.examples = tester([
 	{
 		rules: 'email',
 		value: 1123,
-		expect: false
+		verr: {
+			rule: 'email',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'email',

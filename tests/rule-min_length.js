@@ -6,42 +6,74 @@ exports.examples = tester([
 	{
 		rules: 'min_length 3',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'min_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'min_length 3',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'min_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'min_length 3',
 		value: NaN,
-		expect: false
+		verr: {
+			rule: 'min_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'min_length 3',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'min_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'min_length 3',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'min_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'min_length 3',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'min_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'min_length 3',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'min_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'min_length 3',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'min_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'min_length -2',

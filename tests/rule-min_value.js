@@ -16,7 +16,11 @@ exports.examples = tester([
 	{
 		rules: 'min_value 333',
 		value: 33,
-		expect: false
+		verr: {
+			rule: 'min_value',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'min_value "3"',
@@ -31,7 +35,11 @@ exports.examples = tester([
 	{
 		rules: 'min_value "333"',
 		value: 33,
-		expect: false
+		verr: {
+			rule: 'min_value',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'min_value 3',
@@ -41,12 +49,20 @@ exports.examples = tester([
 	{
 		rules: 'min_value 33',
 		value: "-33",
-		expect: false
+		verr: {
+			rule: 'min_value',
+			params: 33,
+			index: null
+		}
 	},
 	{
 		rules: 'min_value 333',
 		value: "+33",
-		expect: false
+		verr: {
+			rule: 'min_value',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'min_value "3"',
@@ -61,22 +77,38 @@ exports.examples = tester([
 	{
 		rules: 'min_value "333"',
 		value: "33",
-		expect: false
+		verr: {
+			rule: 'min_value',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'min_value "333"',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'min_value',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'min_value 333',
 		value: NaN,
-		expect: false
+		verr: {
+			rule: 'min_value',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'min_value "333"',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'min_value',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'min_value null',

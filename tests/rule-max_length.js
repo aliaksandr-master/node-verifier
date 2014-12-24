@@ -16,22 +16,38 @@ exports.examples = tester([
 	{
 		rules: 'max_length 3',
 		value: NaN,
-		expect: false
+		verr: {
+			rule: 'max_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'max_length 3',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'max_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'max_length 3',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'max_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'max_length 3',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'max_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'max_length 3',
@@ -41,7 +57,11 @@ exports.examples = tester([
 	{
 		rules: 'max_length 3',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'max_length',
+			params: 3,
+			index: null
+		}
 	},
 	{
 		rules: 'max_length -2',
@@ -61,6 +81,10 @@ exports.examples = tester([
 	{
 		rules: 'max_length 0',
 		value: '123123',
-		expect: false
+		verr: {
+			rule: 'max_length',
+			params: 0,
+			index: null
+		}
 	}
 ]);

@@ -7,7 +7,11 @@ exports.examples = tester([
 	{
 		rules: 'type string',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'string',
+			index: null
+		}
 	},
 	{
 		rules: 'type string',
@@ -17,63 +21,111 @@ exports.examples = tester([
 	{
 		rules: 'type string',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'string',
+			index: null
+		}
 	},
 	{
 		rules: 'type string',
 		value: /a/,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'string',
+			index: null
+		}
 	},
 	{
 		rules: 'type string',
 		value: true,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'string',
+			index: null
+		}
 	},
 	{
 		rules: 'type string',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'string',
+			index: null
+		}
 	},
 	{
 		rules: 'type string',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'string',
+			index: null
+		}
 	},
 	{
 		rules: 'type string',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'string',
+			index: null
+		}
 	},
 	{
 		rules: 'type string',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'string',
+			index: null
+		}
 	},
 	{
 		rules: 'type string',
 		value: new Date(),
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'string',
+			index: null
+		}
 	},
 
 	{
 		rules: 'type boolean',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'boolean',
+			index: null
+		}
 	},
 	{
 		rules: 'type boolean',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'boolean',
+			index: null
+		}
 	},
 	{
 		rules: 'type boolean',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'boolean',
+			index: null
+		}
 	},
 	{
 		rules: 'type boolean',
 		value: /a/,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'boolean',
+			index: null
+		}
 	},
 	{
 		rules: 'type boolean',
@@ -83,68 +135,120 @@ exports.examples = tester([
 	{
 		rules: 'type boolean',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'boolean',
+			index: null
+		}
 	},
 	{
 		rules: 'type boolean',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'boolean',
+			index: null
+		}
 	},
 	{
 		rules: 'type boolean',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'boolean',
+			index: null
+		}
 	},
 	{
 		rules: 'type boolean',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'boolean',
+			index: null
+		}
 	},
 	{
 		rules: 'type boolean',
 		value: new Date(),
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'boolean',
+			index: null
+		}
 	},
 
 	{
 		rules: 'type function',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: /a/,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: true,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
@@ -154,48 +258,84 @@ exports.examples = tester([
 	{
 		rules: 'type function',
 		value: new Date(),
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 
 	{
 		rules: 'type function',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: /a/,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: true,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 	{
 		rules: 'type function',
@@ -205,38 +345,66 @@ exports.examples = tester([
 	{
 		rules: 'type function',
 		value: new Date(),
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'function',
+			index: null
+		}
 	},
 
 	{
 		rules: 'type object',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'object',
+			index: null
+		}
 	},
 	{
 		rules: 'type object',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'object',
+			index: null
+		}
 	},
 	{
 		rules: 'type object',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'object',
+			index: null
+		}
 	},
 	{
 		rules: 'type object',
 		value: /a/,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'object',
+			index: null
+		}
 	},
 	{
 		rules: 'type object',
 		value: true,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'object',
+			index: null
+		}
 	},
 	{
 		rules: 'type object',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'object',
+			index: null
+		}
 	},
 	{
 		rules: 'type object',
@@ -246,53 +414,93 @@ exports.examples = tester([
 	{
 		rules: 'type object',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'object',
+			index: null
+		}
 	},
 	{
 		rules: 'type object',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'object',
+			index: null
+		}
 	},
 	{
 		rules: 'type object',
 		value: new Date(),
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'object',
+			index: null
+		}
 	},
 
 	{
 		rules: 'type array',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'array',
+			index: null
+		}
 	},
 	{
 		rules: 'type array',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'array',
+			index: null
+		}
 	},
 	{
 		rules: 'type array',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'array',
+			index: null
+		}
 	},
 	{
 		rules: 'type array',
 		value: /a/,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'array',
+			index: null
+		}
 	},
 	{
 		rules: 'type array',
 		value: true,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'array',
+			index: null
+		}
 	},
 	{
 		rules: 'type array',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'array',
+			index: null
+		}
 	},
 	{
 		rules: 'type array',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'array',
+			index: null
+		}
 	},
 	{
 		rules: 'type array',
@@ -302,38 +510,66 @@ exports.examples = tester([
 	{
 		rules: 'type array',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'array',
+			index: null
+		}
 	},
 	{
 		rules: 'type array',
 		value: new Date(),
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'array',
+			index: null
+		}
 	},
 
 	{
 		rules: 'type undefined',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'undefined',
+			index: null
+		}
 	},
 	{
 		rules: 'type undefined',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'undefined',
+			index: null
+		}
 	},
 	{
 		rules: 'type undefined',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'undefined',
+			index: null
+		}
 	},
 	{
 		rules: 'type undefined',
 		value: /a/,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'undefined',
+			index: null
+		}
 	},
 	{
 		rules: 'type undefined',
 		value: true,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'undefined',
+			index: null
+		}
 	},
 	{
 		rules: 'type undefined',
@@ -343,33 +579,57 @@ exports.examples = tester([
 	{
 		rules: 'type undefined',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'undefined',
+			index: null
+		}
 	},
 	{
 		rules: 'type undefined',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'undefined',
+			index: null
+		}
 	},
 	{
 		rules: 'type undefined',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'undefined',
+			index: null
+		}
 	},
 	{
 		rules: 'type undefined',
 		value: new Date(),
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'undefined',
+			index: null
+		}
 	},
 
 	{
 		rules: 'type "null"',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'null',
+			index: null
+		}
 	},
 	{
 		rules: 'type "null"',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'null',
+			index: null
+		}
 	},
 	{
 		rules: 'type "null"',
@@ -379,53 +639,93 @@ exports.examples = tester([
 	{
 		rules: 'type "null"',
 		value: /a/,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'null',
+			index: null
+		}
 	},
 	{
 		rules: 'type "null"',
 		value: true,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'null',
+			index: null
+		}
 	},
 	{
 		rules: 'type "null"',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'null',
+			index: null
+		}
 	},
 	{
 		rules: 'type "null"',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'null',
+			index: null
+		}
 	},
 	{
 		rules: 'type "null"',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'null',
+			index: null
+		}
 	},
 	{
 		rules: 'type "null"',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'null',
+			index: null
+		}
 	},
 	{
 		rules: 'type "null"',
 		value: new Date(),
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'null',
+			index: null
+		}
 	},
 
 	{
 		rules: 'type RegExp',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'RegExp',
+			index: null
+		}
 	},
 	{
 		rules: 'type RegExp',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'RegExp',
+			index: null
+		}
 	},
 	{
 		rules: 'type RegExp',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'RegExp',
+			index: null
+		}
 	},
 	{
 		rules: 'type RegExp',
@@ -435,33 +735,57 @@ exports.examples = tester([
 	{
 		rules: 'type RegExp',
 		value: true,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'RegExp',
+			index: null
+		}
 	},
 	{
 		rules: 'type RegExp',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'RegExp',
+			index: null
+		}
 	},
 	{
 		rules: 'type RegExp',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'RegExp',
+			index: null
+		}
 	},
 
 	{
 		rules: 'type RegExp',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'RegExp',
+			index: null
+		}
 	},
 	{
 		rules: 'type RegExp',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'RegExp',
+			index: null
+		}
 	},
 	{
 		rules: 'type RegExp',
 		value: new Date(),
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'RegExp',
+			index: null
+		}
 	},
 
 	{
@@ -472,88 +796,156 @@ exports.examples = tester([
 	{
 		rules: 'type number',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'number',
+			index: null
+		}
 	},
 	{
 		rules: 'type number',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'number',
+			index: null
+		}
 	},
 	{
 		rules: 'type number',
 		value: /a/,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'number',
+			index: null
+		}
 	},
 	{
 		rules: 'type number',
 		value: true,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'number',
+			index: null
+		}
 	},
 	{
 		rules: 'type number',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'number',
+			index: null
+		}
 	},
 	{
 		rules: 'type number',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'number',
+			index: null
+		}
 	},
 	{
 		rules: 'type number',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'number',
+			index: null
+		}
 	},
 	{
 		rules: 'type number',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'number',
+			index: null
+		}
 	},
 	{
 		rules: 'type number',
 		value: new Date(),
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'number',
+			index: null
+		}
 	},
 
 	{
 		rules: 'type Date',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'Date',
+			index: null
+		}
 	},
 	{
 		rules: 'type Date',
 		value: "",
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'Date',
+			index: null
+		}
 	},
 	{
 		rules: 'type Date',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'Date',
+			index: null
+		}
 	},
 	{
 		rules: 'type Date',
 		value: /a/,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'Date',
+			index: null
+		}
 	},
 	{
 		rules: 'type Date',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'Date',
+			index: null
+		}
 	},
 	{
 		rules: 'type Date',
 		value: {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'Date',
+			index: null
+		}
 	},
 	{
 		rules: 'type Date',
 		value: [],
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'Date',
+			index: null
+		}
 	},
 	{
 		rules: 'type Date',
 		value: function () {},
-		expect: false
+		verr: {
+			rule: 'type',
+			params: 'Date',
+			index: null
+		}
 	},
 	{
 		rules: 'type Date',

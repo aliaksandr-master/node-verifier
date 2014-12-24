@@ -6,12 +6,20 @@ exports.examples = tester([
 	{
 		rules: 'eq "333"',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'eq',
+			params: "333",
+			index: null
+		}
 	},
 	{
 		rules: 'eq "333"',
 		value: 333,
-		expect: false
+		verr: {
+			rule: 'eq',
+			params: "333",
+			index: null
+		}
 	},
 	{
 		rules: 'eq "333"',
@@ -21,7 +29,11 @@ exports.examples = tester([
 	{
 		rules: 'eq 333',
 		value: NaN,
-		expect: false
+		verr: {
+			rule: 'eq',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'eq 333',
@@ -31,27 +43,47 @@ exports.examples = tester([
 	{
 		rules: 'eq 333',
 		value: "333",
-		expect: false
+		verr: {
+			rule: 'eq',
+			params: 333,
+			index: null
+		}
 	},
 	{
 		rules: 'eq "333"',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'eq',
+			params: "333",
+			index: null
+		}
 	},
 	{
 		rules: 'eq null',
 		value: 33,
-		expect: false
+		verr: {
+			rule: 'eq',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'eq "null"',
 		value: null,
-		expect: false
+		verr: {
+			rule: 'eq',
+			params: "null",
+			index: null
+		}
 	},
 	{
 		rules: 'eq null',
 		value: NaN,
-		expect: false
+		verr: {
+			rule: 'eq',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'eq null',
@@ -61,6 +93,10 @@ exports.examples = tester([
 	{
 		rules: 'eq true',
 		value: undefined,
-		expect: false
+		verr: {
+			rule: 'eq',
+			params: true,
+			index: null
+		}
 	}
 ]);

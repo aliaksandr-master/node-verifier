@@ -47,11 +47,11 @@ exports.flow = {
 		});
 
 		test.throws(function () {
-			var CustomRule = new Verifier.Rule.extend();
+			var CustomRule = Verifier.Rule.extend({});
 		});
 
 		test.throws(function () {
-			var CustomRule = new Verifier.Rule.extend( { name: 'some' } );
+			var CustomRule = Verifier.Rule.extend( { name: 'some' } );
 		});
 
 		var error = new Error('hello');
@@ -104,7 +104,7 @@ exports.flow = {
 		var rule = new CustomRule();
 
 		var MyCustomRule = CustomRule.extend({
-			check: function () {
+			check: function (aaaa) {
 				throw error;
 			}
 		});
@@ -116,7 +116,21 @@ exports.flow = {
 
 			myRule.verify(234, function (err) {
 				test.ok(err === error);
-				test.done();
+
+
+				var MyRule2 = Verifier.Rule.extend({
+					check: function (value, params, done) {
+						done();
+						done();
+						done();
+						done();
+					}
+				});
+
+				var myRule2= new MyRule2(123);
+				myRule2.verify(123, function () {
+					test.done();
+				});
 			});
 		});
 	}

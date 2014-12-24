@@ -11,12 +11,20 @@ exports.examples = tester([
 	{
 		rules: 'empty',
 		value: 333,
-		expect: false
+		verr: {
+			rule: 'empty',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'empty',
 		value: "333",
-		expect: false
+		verr: {
+			rule: 'empty',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'empty',
@@ -26,12 +34,20 @@ exports.examples = tester([
 	{
 		rules: 'empty',
 		value: 333,
-		expect: false
+		verr: {
+			rule: 'empty',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'empty',
 		value: "333",
-		expect: false
+		verr: {
+			rule: 'empty',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'empty',
@@ -41,7 +57,11 @@ exports.examples = tester([
 	{
 		rules: 'empty',
 		value: 33,
-		expect: false
+		verr: {
+			rule: 'empty',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'empty',
@@ -56,7 +76,11 @@ exports.examples = tester([
 	{
 		rules: 'empty',
 		value: {a: 123},
-		expect: false
+		verr: {
+			rule: 'empty',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'empty',
@@ -71,7 +95,11 @@ exports.examples = tester([
 	{
 		rules: 'empty',
 		value: [1],
-		expect: false
+		verr: {
+			rule: 'empty',
+			params: null,
+			index: null
+		}
 	},
 	{
 		rules: 'empty',
@@ -81,6 +109,10 @@ exports.examples = tester([
 	{
 		rules: 'empty',
 		value: '0',
-		expect: false
+		verr: {
+			rule: 'empty',
+			params: null,
+			index: null
+		}
 	}
 ]);

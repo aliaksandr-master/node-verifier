@@ -7,7 +7,11 @@ exports.examples = tester([
 	{
 		rules: 'format 3',
 		value: 4,
-		expect: false
+		verr: {
+			rule: 'format',
+			params: '3',
+			index: null
+		}
 	},
 	{
 		rules: 'format 3',
@@ -22,7 +26,11 @@ exports.examples = tester([
 	{
 		rules: 'format ^3',
 		value: 433,
-		expect: false
+		verr: {
+			rule: 'format',
+			params: '^3',
+			index: null
+		}
 	},
 	{
 		rules: 'format ^3',
@@ -37,17 +45,29 @@ exports.examples = tester([
 	{
 		rules: 'format ^3$',
 		value: 33,
-		expect: false
+		verr: {
+			rule: 'format',
+			params: '^3$',
+			index: null
+		}
 	},
 	{
 		rules: 'format ^[a-zA-Z][a-zA-Z0-9_.-]*@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$',
 		value: 33,
-		expect: false
+		verr: {
+			rule: 'format',
+			params: '^[a-zA-Z][a-zA-Z0-9_.-]*@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$',
+			index: null
+		}
 	},
 	{
 		rules: 'format ^[a-zA-Z][a-zA-Z0-9_.-]*@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$',
 		value: "asdasdasd",
-		expect: false
+		verr: {
+			rule: 'format',
+			params: '^[a-zA-Z][a-zA-Z0-9_.-]*@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$',
+			index: null
+		}
 	},
 	{
 		rules: 'format ^[a-zA-Z][a-zA-Z0-9_.-]*@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$',

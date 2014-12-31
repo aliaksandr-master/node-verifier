@@ -18,8 +18,8 @@ exports.examples = tester([
 		},
 		value: 333,
 		verr: {
-			rule: 'any',
-			params: [[{type: 'object'}], [{type: 'string'}]]
+			rule: 'type',
+			params: 'string'
 		}
 	},
 	{
@@ -31,8 +31,8 @@ exports.examples = tester([
 		},
 		value: 333,
 		verr: {
-			rule: 'any',
-			params: [[{type: 'object'}], [{type: 'string'}]]
+			rule: 'type',
+			params: 'string'
 		}
 	},
 	{
@@ -54,10 +54,9 @@ exports.examples = tester([
 			}
 		},
 		value: "123",
-		expect: false,
 		verr: {
-			rule: 'any',
-			params: [[{eq: 123}], [{eq: 234}], [{eq: 345}]]
+			rule: 'eq',
+			params: 345
 		}
 	},
 	{
@@ -83,10 +82,53 @@ exports.examples = tester([
 			any: [ { eq: 123 }, { eq: 234 }, { eq: 345 } ]
 		},
 		value: 120,
-		expect: false,
 		verr: {
-			rule: 'any',
-			params: [[{eq: 123}], [{eq: 234}], [{eq: 345}]]
+			rule: 'eq',
+			params: 345
+		}
+	},
+	{
+		rules: {
+			any: [ 'not required', ['type string', {contains: ['ASC', 'DESC']}] ]
+		},
+		value: 120,
+		verr: {
+			rule: 'type',
+			params: 'string'
+		}
+	},
+	{
+		rules: {
+			any: [ 'type undefined', ['type string', {contains: ['ASC', 'DESC']}] ]
+		},
+		value: undefined,
+		expect: true
+	},
+	{
+		rules: {
+			any: [ 'type undefined', ['type string', {contains: ['ASC', 'DESC']}] ]
+		},
+		value: 'ASC',
+		expect: true
+	},
+	{
+		rules: {
+			any: [ 'type undefined', ['type string', {contains: ['ASC', 'DESC']}] ]
+		},
+		value: 'asd',
+		verr: {
+			rule: 'contains',
+			params: ['ASC', 'DESC']
+		}
+	},
+	{
+		rules: {
+			any: [ 'type undefined', ['type string', {contains: ['ASC', 'DESC']}] ]
+		},
+		value: 'asc',
+		verr: {
+			rule: 'contains',
+			params: ['ASC', 'DESC']
 		}
 	}
 ]);

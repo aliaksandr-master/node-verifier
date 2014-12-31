@@ -27,8 +27,8 @@ exports.examples = tester([
 		rules: 'each type object',
 		value: 333,
 		verr: {
-			rule: 'each',
-			params: [{type: 'object'}],
+			rule: 'type',
+			params: 'array',
 			index: null
 		}
 	},
@@ -36,8 +36,8 @@ exports.examples = tester([
 		rules: {'each': ['type object', 'not empty']},
 		value: [{}],
 		verr: {
-			rule: 'each',
-			params: { not: [ { empty: null } ] },
+			rule: 'not',
+			params: [{ empty: null }],
 			index: 0
 		}
 	},
@@ -45,8 +45,8 @@ exports.examples = tester([
 		rules: 'each type object',
 		value: [333],
 		verr: {
-			rule: 'each',
-			params: { type: 'object' },
+			rule: 'type',
+			params: 'object',
 			index: 0
 		}
 	},
@@ -54,8 +54,8 @@ exports.examples = tester([
 		rules: 'each type object',
 		value: [{}, []],
 		verr: {
-			rule: 'each',
-			params: { type: 'object' },
+			rule: 'type',
+			params: 'object',
 			index: 1
 		}
 	},
@@ -63,8 +63,8 @@ exports.examples = tester([
 		rules: {each: ['max_value 10', 'max_length 1']},
 		value: [{}],
 		verr: {
-			rule: 'each',
-			params: { max_value: 10 },
+			rule: 'max_value',
+			params: 10,
 			index: 0
 		}
 	},
@@ -72,8 +72,8 @@ exports.examples = tester([
 		rules: {each: ['type number', 'max_value 10', 'max_length 1']},
 		value: [{}],
 		verr: {
-			rule: 'each',
-			params: { type: 'number' },
+			rule: 'type',
+			params: 'number',
 			index: 0
 		}
 	},
@@ -81,8 +81,8 @@ exports.examples = tester([
 		rules: {each: ['type number', 'max_value 10', 'max_length 1']},
 		value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 		verr: {
-			rule: 'each',
-			params: { max_length: 1 },
+			rule: 'max_length',
+			params: 1,
 			index: 9
 		}
 	}

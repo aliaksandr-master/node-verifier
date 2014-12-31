@@ -11,7 +11,16 @@ var inspect = function (value) {
 
 var tester = function (cases) {
 	return function (test) {
-		async.each(cases, function (testCase, done) {
+		var testCases = _.map(cases, function (testCase, i) {
+			return {
+				testCase: testCase,
+				number: i
+			};
+		});
+
+		async.each(testCases, function (testCaseObj, done) {
+			var testCase = testCaseObj.testCase;
+			var number = testCaseObj.number;
 			var verifier;
 			try {
 				verifier = new Verifier(testCase.rules);
@@ -21,7 +30,7 @@ var tester = function (cases) {
 						var r = e.message.indexOf('#' + testCase.error + ': ') === 0;
 
 						if (!r) {
-							console.error(('must be error! #'+testCase.error + ' -> given "' + e.message + '"').red);
+							console.error('>>> #'+number+': ', ('must be error! #'+testCase.error + ' -> given "' + e.message + '"').red);
 						}
 
 						test.ok(r);
@@ -36,7 +45,7 @@ var tester = function (cases) {
 			}
 
 			if (testCase.error) {
-				console.log('must be error! ' + testCase.error);
+				console.log('>>> #'+number+': ', 'must be error! ' + testCase.error);
 				done('must be error!');
 				return;
 			}
@@ -46,14 +55,14 @@ var tester = function (cases) {
 				if (err) {
 					if (err instanceof Verifier.Rule.ValidationError) {
 						if (testCase.expect) {
-							console.log('validation-error >> ', inspect(err));
+							console.log('>>> #'+number+': ', 'validation-error >> ', inspect(err));
 						}
 
 						test.ok(!testCase.expect);
 
 						if (testCase.verr) {
 							_.each(testCase.verr, function (v, k) {
-								test.ok(_.isEqual(err[k], v), 'must be equal:'+inspect(v)+'<<and>>'+inspect(err[k]));
+								test.ok(_.isEqual(err[k], v), '>>> #'+number+': must be equal (expect:):'+inspect(v)+'<< given: >>'+inspect(err[k]));
 							});
 						}
 
@@ -61,7 +70,7 @@ var tester = function (cases) {
 						return;
 					}
 
-					console.log('unexpected error Error('.red, err instanceof Error, ') \n>>'.red, err, '\n', inspect(testCase).cyan);
+					console.log('>>> #'+number+': ', 'unexpected error Error('.red, err instanceof Error, ') \n>>'.red, err, '\n', inspect(testCase).cyan);
 					done(err);
 					return;
 				}

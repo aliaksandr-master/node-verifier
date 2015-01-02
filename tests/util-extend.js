@@ -1,6 +1,6 @@
 "use strict";
 
-var extend = require('../lib/utils/extend');
+var extend = require('./_lib/utils-extend');
 
 exports.instanceof = function (test) {
 	var F = function () {};

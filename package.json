@@ -33,6 +33,7 @@
   "homepage": "https://github.com/aliaksandr-pasynkau/node-verifier",
   "dependencies": {
     "lodash": "~2.4.1",
+    "async-iterate": "~0.1.3",
     "email-validator": "^1.0.1"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "node-verifier",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "extensible value validator",
   "main": "index.js",
   "scripts": {

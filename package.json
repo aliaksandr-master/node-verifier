@@ -27,15 +27,18 @@
   },
   "homepage": "https://github.com/aliaksandr-pasynkau/node-verifier",
   "dependencies": {
-    "async-iterate": "~0.1.4",
+    "async-iterate": "^0.1.6",
     "email-validator": "~1.0.1",
-    "lodash": "~3.8.0"
+    "lodash": "^3.8.0"
   },
   "devDependencies": {
-    "async": "^0.9.0",
+    "async": "^1.2.1",
     "colors": "^1.0.3",
     "grunt": "^0.4.5",
-    "grunto": "^1.3.6",
-    "grunt-contrib-jshint": "^0.11.0"
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-eslint": "^15.0.0",
+    "grunt-newer": "^1.1.1",
+    "grunto": "^1.4.3"
   }
 }

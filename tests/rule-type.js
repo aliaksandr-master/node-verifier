@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars: 0 no-undefined:0 */
 
 var tester = require('./_lib/tester');
 var Verifier = require('./_lib/lib');
@@ -15,7 +16,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type string',
-		value: "",
+		value: '',
 		expect: true
 	},
 	{
@@ -102,7 +103,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type boolean',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'type',
 			params: 'boolean',
@@ -189,7 +190,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type function',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'type',
 			params: 'function',
@@ -276,7 +277,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type function',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'type',
 			params: 'function',
@@ -363,7 +364,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type object',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'type',
 			params: 'object',
@@ -450,7 +451,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type array',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'type',
 			params: 'array',
@@ -537,7 +538,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type undefined',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'type',
 			params: 'undefined',
@@ -624,7 +625,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type "null"',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'type',
 			params: 'null',
@@ -711,7 +712,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type RegExp',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'type',
 			params: 'RegExp',
@@ -795,7 +796,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type number',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'type',
 			params: 'number',
@@ -886,7 +887,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'type Date',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'type',
 			params: 'Date',
@@ -956,7 +957,8 @@ exports.examples = tester([
 
 exports['check params'] = function (test) {
 	test.throws(function () {
-		var verifier = new Verifier({type: null});
+		var verifier = new Verifier({ type: null });
+
 	});
 
 	test.done();

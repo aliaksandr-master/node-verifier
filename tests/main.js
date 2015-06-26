@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars:0, no-undefined:0, new-cap:0 */
 
 var _ = require('lodash');
 var tester = require('./_lib/tester');
@@ -6,23 +7,23 @@ var Verifier = require('./_lib/lib');
 
 exports.flow = {
 	standard_call: tester([
-		{ rules: 'type string',                       value: 4,      verr: { rule: 'type', params: 'string', index: null } },
-		{ rules: 'type string',                       value: "",     expect: true },
-		{ rules: ['type string'],                     value: 4,      verr: { rule: 'type', params: 'string', index: null } },
-		{ rules: ['type string'],                     value: "",     expect: true },
-		{ rules: {type: 'string'},                    value: 4,      verr: { rule: 'type', params: 'string', index: null } },
-		{ rules: {type: 'string'},                    value: "",     expect: true },
-		{ rules: [{type: 'string'}],                  value: 4,      verr: { rule: 'type', params: 'string', index: null } },
-		{ rules: [{type: 'string'}],                  value: "",     expect: true },
-		{ rules: ['type string', 'max_length 2'],     value: 4,      verr: { rule: 'type', params: 'string', index: null } },
-		{ rules: ['type string', 'max_length 2'],     value: "1",    expect: true },
-		{ rules: [{type: 'string'}, {max_length: 2}], value: 4,      verr: { rule: 'type', params: 'string', index: null } },
-		{ rules: [{type: 'string'}, {max_length: 2}], value: "1",    expect: true }
+		{ rules: 'type string', value: 4, verr: { rule: 'type', params: 'string', index: null } },
+		{ rules: 'type string', value: '', expect: true },
+		{ rules: ['type string'], value: 4, verr: { rule: 'type', params: 'string', index: null } },
+		{ rules: ['type string'], value: '', expect: true },
+		{ rules: { type: 'string' }, value: 4, verr: { rule: 'type', params: 'string', index: null } },
+		{ rules: { type: 'string' }, value: '', expect: true },
+		{ rules: [{ type: 'string' }], value: 4, verr: { rule: 'type', params: 'string', index: null } },
+		{ rules: [{ type: 'string' }], value: '', expect: true },
+		{ rules: [ 'type string', 'max_length 2' ], value: 4, verr: { rule: 'type', params: 'string', index: null } },
+		{ rules: [ 'type string', 'max_length 2' ], value: '1', expect: true },
+		{ rules: [ { type: 'string' }, { max_length: 2 } ], value: 4, verr: { rule: 'type', params: 'string', index: null } },
+		{ rules: [ { type: 'string' }, { max_length: 2 } ], value: '1', expect: true }
 	]),
 
 	'create by function': function (test) {
 		var verifier1 = new Verifier('type string');
-		var verifier2 = Verifier('type string'); // jshint ignore : line
+		var verifier2 = Verifier('type string');
 
 		test.ok(_.isEqual(verifier1, verifier2));
 		test.done();
@@ -32,26 +33,32 @@ exports.flow = {
 
 		test.throws(function () {
 			var verifier = new Verifier();
+
 		});
 
 		test.throws(function () {
 			var verifier = new Verifier(123);
+
 		});
 
 		test.throws(function () {
 			var verifier = new Verifier('');
+
 		});
 
 		test.doesNotThrow(function () {
 			var verifier = Verifier([]); // jshint ignore : line
+
 		});
 
 		test.throws(function () {
 			var CustomRule = Verifier.Rule.extend({});
+
 		});
 
 		test.throws(function () {
-			var CustomRule = Verifier.Rule.extend( { name: 'some' } );
+			var CustomRule = Verifier.Rule.extend({ name: 'some' });
+
 		});
 
 		var error = new Error('hello');
@@ -61,7 +68,7 @@ exports.flow = {
 			}
 		});
 
-		Verifier.Rule.add("some", CustomRule);
+		Verifier.Rule.add('some', CustomRule);
 
 		test.throws(function () {
 			Verifier.Rule.add();
@@ -72,25 +79,26 @@ exports.flow = {
 		});
 
 		test.doesNotThrow(function () {
-			Verifier.Rule.add("some", CustomRule, false);
+			Verifier.Rule.add('some', CustomRule, false);
 		});
 
 		test.throws(function () {
-			Verifier.Rule.add("some");
+			Verifier.Rule.add('some');
 		});
 
 		test.throws(function () {
-			Verifier.Rule.add("some1", 123);
+			Verifier.Rule.add('some1', 123);
 		});
 
 		test.throws(function () {
-			Verifier.Rule.add("some1", function () {});
+			Verifier.Rule.add('some1', function () {});
 		});
 
 		test.throws(function () {
 			var f = function () {};
+
 			f.prototype = { check: function () {} };
-			Verifier.Rule.add("some1", function () {});
+			Verifier.Rule.add('some1', function () {});
 		});
 
 		test.throws(function () {
@@ -117,7 +125,6 @@ exports.flow = {
 			myRule.verify(234, function (err) {
 				test.ok(err === error);
 
-
 				var MyRule2 = Verifier.Rule.extend({
 					check: function (value, params, done) {
 						done();
@@ -127,7 +134,8 @@ exports.flow = {
 					}
 				});
 
-				var myRule2= new MyRule2(123);
+				var myRule2 = new MyRule2(123);
+
 				myRule2.verify(123, function () {
 					test.done();
 				});

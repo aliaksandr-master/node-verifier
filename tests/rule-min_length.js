@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars: 0 no-undefined:0 */
 
 var tester = require('./_lib/tester');
 
@@ -14,7 +15,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'min_length 3',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'min_length',
 			params: 3,

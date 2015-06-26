@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var tester = require('./_lib/tester');
 
@@ -23,16 +23,16 @@ exports.examples = tester([
 		value: 3,
 		verr: {
 			rule: 'not',
-			params: [{format: '^3$'}],
+			params: [{ format: '^3$' }],
 			index: null
 		}
 	},
 	{
 		rules: 'not type string',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'not',
-			params: [{type: 'string'}],
+			params: [{ type: 'string' }],
 			index: null
 		}
 	},
@@ -43,15 +43,15 @@ exports.examples = tester([
 	},
 	{
 		rules: 'not exact_length 3',
-		value: "",
+		value: '',
 		expect: true
 	},
 	{
 		rules: 'not exact_length 3',
-		value: "111",
+		value: '111',
 		verr: {
 			rule: 'not',
-			params: [{exact_length: 3}],
+			params: [{ exact_length: 3 }],
 			index: null
 		}
 	}

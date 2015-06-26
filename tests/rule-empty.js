@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars: 0 no-undefined:0 */
 
 var tester = require('./_lib/tester');
 
@@ -19,7 +20,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'empty',
-		value: "333",
+		value: '333',
 		verr: {
 			rule: 'empty',
 			params: null,
@@ -42,7 +43,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'empty',
-		value: "333",
+		value: '333',
 		verr: {
 			rule: 'empty',
 			params: null,
@@ -75,7 +76,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'empty',
-		value: {a: 123},
+		value: { a: 123 },
 		verr: {
 			rule: 'empty',
 			params: null,
@@ -84,7 +85,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'empty',
-		value: Object.create({a: 123}),
+		value: Object.create({ a: 123 }),
 		expect: true
 	},
 	{

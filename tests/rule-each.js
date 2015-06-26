@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars: 0 no-undefined:0 */
 
 var tester = require('./_lib/tester');
 
@@ -19,8 +20,8 @@ exports.examples = tester([
 		expect: 'REACH1'
 	},
 	{
-		rules: {each: ['type number', 'max_value 10', 'max_length 1']},
-		value: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+		rules: { each: [ 'type number', 'max_value 10', 'max_length 1' ] },
+		value: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
 		expect: true
 	},
 	{
@@ -33,7 +34,7 @@ exports.examples = tester([
 		}
 	},
 	{
-		rules: {'each': ['type object', 'not empty']},
+		rules: { 'each': [ 'type object', 'not empty' ] },
 		value: [{}],
 		verr: {
 			rule: 'not',
@@ -52,7 +53,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'each type object',
-		value: [{}, []],
+		value: [ {}, [] ],
 		verr: {
 			rule: 'type',
 			params: 'object',
@@ -60,7 +61,7 @@ exports.examples = tester([
 		}
 	},
 	{
-		rules: {each: ['max_value 10', 'max_length 1']},
+		rules: { each: [ 'max_value 10', 'max_length 1' ] },
 		value: [{}],
 		verr: {
 			rule: 'max_value',
@@ -69,7 +70,7 @@ exports.examples = tester([
 		}
 	},
 	{
-		rules: {each: ['type number', 'max_value 10', 'max_length 1']},
+		rules: { each: [ 'type number', 'max_value 10', 'max_length 1' ] },
 		value: [{}],
 		verr: {
 			rule: 'type',
@@ -78,8 +79,8 @@ exports.examples = tester([
 		}
 	},
 	{
-		rules: {each: ['type number', 'max_value 10', 'max_length 1']},
-		value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+		rules: { each: [ 'type number', 'max_value 10', 'max_length 1' ] },
+		value: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
 		verr: {
 			rule: 'max_length',
 			params: 1,

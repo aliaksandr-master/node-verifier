@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars: 0 no-undefined:0 */
 
 var tester = require('./_lib/tester');
 
@@ -43,7 +44,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'max_value 3',
-		value: "33",
+		value: '33',
 		verr: {
 			rule: 'max_value',
 			params: 3,
@@ -52,17 +53,17 @@ exports.examples = tester([
 	},
 	{
 		rules: 'max_value 33',
-		value: "-33",
+		value: '-33',
 		expect: true
 	},
 	{
 		rules: 'max_value 333',
-		value: "+33",
+		value: '+33',
 		expect: true
 	},
 	{
 		rules: 'max_value "3"',
-		value: "33",
+		value: '33',
 		verr: {
 			rule: 'max_value',
 			params: 3,
@@ -71,12 +72,12 @@ exports.examples = tester([
 	},
 	{
 		rules: 'max_value "33"',
-		value: "33",
+		value: '33',
 		expect: true
 	},
 	{
 		rules: 'max_value "333"',
-		value: "33",
+		value: '33',
 		expect: true
 	},
 	{

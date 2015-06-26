@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars: 0 no-undefined:0 */
 
 var tester = require('./_lib/tester');
 
@@ -8,7 +9,7 @@ exports.examples = tester([
 		value: null,
 		verr: {
 			rule: 'eq',
-			params: "333",
+			params: '333',
 			index: null
 		}
 	},
@@ -17,13 +18,13 @@ exports.examples = tester([
 		value: 333,
 		verr: {
 			rule: 'eq',
-			params: "333",
+			params: '333',
 			index: null
 		}
 	},
 	{
 		rules: 'eq "333"',
-		value: "333",
+		value: '333',
 		expect: true
 	},
 	{
@@ -42,7 +43,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'eq 333',
-		value: "333",
+		value: '333',
 		verr: {
 			rule: 'eq',
 			params: 333,
@@ -54,7 +55,7 @@ exports.examples = tester([
 		value: undefined,
 		verr: {
 			rule: 'eq',
-			params: "333",
+			params: '333',
 			index: null
 		}
 	},
@@ -72,7 +73,7 @@ exports.examples = tester([
 		value: null,
 		verr: {
 			rule: 'eq',
-			params: "null",
+			params: 'null',
 			index: null
 		}
 	},

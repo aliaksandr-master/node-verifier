@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars: 0 no-undefined:0 */
 
 var tester = require('./_lib/tester');
 
@@ -43,12 +44,12 @@ exports.examples = tester([
 	},
 	{
 		rules: 'min_value 3',
-		value: "33",
+		value: '33',
 		expect: true
 	},
 	{
 		rules: 'min_value 33',
-		value: "-33",
+		value: '-33',
 		verr: {
 			rule: 'min_value',
 			params: 33,
@@ -57,7 +58,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'min_value 333',
-		value: "+33",
+		value: '+33',
 		verr: {
 			rule: 'min_value',
 			params: 333,
@@ -66,17 +67,17 @@ exports.examples = tester([
 	},
 	{
 		rules: 'min_value "3"',
-		value: "33",
+		value: '33',
 		expect: true
 	},
 	{
 		rules: 'min_value "33"',
-		value: "33",
+		value: '33',
 		expect: true
 	},
 	{
 		rules: 'min_value "333"',
-		value: "33",
+		value: '33',
 		verr: {
 			rule: 'min_value',
 			params: 333,

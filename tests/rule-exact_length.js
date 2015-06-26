@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars: 0 no-undefined:0 */
 
 var tester = require('./_lib/tester');
 
@@ -15,7 +16,7 @@ exports.examples = tester([
 
 	{
 		rules: 'exact_length 3',
-		value: "",
+		value: '',
 		verr: {
 			rule: 'exact_length',
 			params: 3,
@@ -25,7 +26,7 @@ exports.examples = tester([
 
 	{
 		rules: 'exact_length 3',
-		value: "111",
+		value: '111',
 		expect: true
 	},
 
@@ -90,7 +91,6 @@ exports.examples = tester([
 		value: [ 1, 2, 3 ],
 		expect: true
 	},
-		
 	{
 		rules: 'exact_length 3',
 		value: function () {},
@@ -100,25 +100,21 @@ exports.examples = tester([
 			index: null
 		}
 	},
-		
 	{
 		rules: 'exact_length -2',
 		value: '',
 		error: 'REXACTLENGTH1'
 	},
-		
 	{
 		rules: 'exact_length -2',
 		value: 'asdasd',
 		error: 'REXACTLENGTH1'
 	},
-		
 	{
 		rules: 'exact_length 0',
 		value: '',
 		expect: true
 	},
-		
 	{
 		rules: 'exact_length 0',
 		value: '123123',

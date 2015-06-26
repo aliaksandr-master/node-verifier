@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+/*eslint no-unused-vars: 0 no-undefined:0 */
 
 var tester = require('./_lib/tester');
 var Verifier = require('./_lib/lib');
@@ -12,8 +13,8 @@ exports.examples = tester([
 	{
 		rules: {
 			any: [
-				[{type: 'object'}],
-				[{type: 'string'}]
+				[{ type: 'object' }],
+				[{ type: 'string' }]
 			]
 		},
 		value: 333,
@@ -25,8 +26,8 @@ exports.examples = tester([
 	{
 		rules: {
 			any: {
-				branch1: [ { type: 'object' } ],
-				branch2: [ { type: 'string' } ]
+				branch1: [{ type: 'object' }],
+				branch2: [{ type: 'string' }]
 			}
 		},
 		value: 333,
@@ -38,22 +39,22 @@ exports.examples = tester([
 	{
 		rules: {
 			any: {
-				branch1: [ { type: 'object' } ],
-				branch2: [ { type: 'string' } ]
+				branch1: [{ type: 'object' }],
+				branch2: [{ type: 'string' }]
 			}
 		},
-		value: "123",
+		value: '123',
 		expect: true
 	},
 	{
 		rules: {
 			any: {
-				branch1: {eq: 123},
-				branch2: {eq: 234},
-				branch3: {eq: 345}
+				branch1: { eq: 123 },
+				branch2: { eq: 234 },
+				branch3: { eq: 345 }
 			}
 		},
-		value: "123",
+		value: '123',
 		verr: {
 			rule: 'eq',
 			params: 345
@@ -62,9 +63,9 @@ exports.examples = tester([
 	{
 		rules: {
 			any: {
-				branch1: {eq: 123},
-				branch2: {eq: 234},
-				branch3: {eq: 345}
+				branch1: { eq: 123 },
+				branch2: { eq: 234 },
+				branch3: { eq: 345 }
 			}
 		},
 		value: 123,
@@ -89,7 +90,7 @@ exports.examples = tester([
 	},
 	{
 		rules: {
-			any: [ 'not required', ['type string', {contains: ['ASC', 'DESC']}] ]
+			any: [ 'not required', [ 'type string', { contains: [ 'ASC', 'DESC' ] } ] ]
 		},
 		value: 120,
 		verr: {
@@ -99,50 +100,52 @@ exports.examples = tester([
 	},
 	{
 		rules: {
-			any: [ 'type undefined', ['type string', {contains: ['ASC', 'DESC']}] ]
+			any: [ 'type undefined', [ 'type string', { contains: [ 'ASC', 'DESC' ] } ] ]
 		},
 		value: undefined,
 		expect: true
 	},
 	{
 		rules: {
-			any: [ 'type undefined', ['type string', {contains: ['ASC', 'DESC']}] ]
+			any: [ 'type undefined', [ 'type string', { contains: [ 'ASC', 'DESC' ] } ] ]
 		},
 		value: 'ASC',
 		expect: true
 	},
 	{
 		rules: {
-			any: [ 'type undefined', ['type string', {contains: ['ASC', 'DESC']}] ]
+			any: [ 'type undefined', [ 'type string', { contains: [ 'ASC', 'DESC' ] } ] ]
 		},
 		value: 'asd',
 		verr: {
 			rule: 'contains',
-			params: ['ASC', 'DESC']
+			params: [ 'ASC', 'DESC' ]
 		}
 	},
 	{
 		rules: {
-			any: [ 'type undefined', ['type string', {contains: ['ASC', 'DESC']}] ]
+			any: [ 'type undefined', [ 'type string', { contains: [ 'ASC', 'DESC' ] } ] ]
 		},
 		value: 'asc',
 		verr: {
 			rule: 'contains',
-			params: ['ASC', 'DESC']
+			params: [ 'ASC', 'DESC' ]
 		}
 	}
 ]);
 
 exports['check params'] = function (test) {
 	test.throws(function () {
-		var verifier = new Verifier({any: [1, 2]});
+		var verifier = new Verifier({ any: [ 1, 2 ] });
+
 	});
 
 	test.throws(function () {
 		var verifier = new Verifier('any a');
+
 	});
 
-	var verifier = new Verifier({'any': null});
+	var verifier = new Verifier({ any: null });
 
 	verifier.verify(123, function (err) {
 		test.ok(!err);
@@ -163,8 +166,8 @@ exports['check error'] = function (test) {
 
 	var verifier = new Verifier({
 		'any': [
-			[{ type: 'object'}],
-			[{ mySuperRule: '123123'}]
+			[{ type: 'object' }],
+			[{ mySuperRule: '123123' }]
 		]
 	});
 

@@ -1,14 +1,20 @@
 "use strict";
 
 module.exports = require('grunto')(function(grunt) {
+
+	grunt.registerTask('test', [
+		'jshint'
+	]);
+
 	return {
 		jshint: {
-			options: grunt.file.readJSON('.jshintrc'),
+			options: {
+				jshintrc: true
+			},
 			all: [
-				'index.js',
-				'lib/**/*.{js,json}',
-				'Gruntfile.js',
-				'tests/**/*.{js,json}'
+				'**/*.js',
+				'!node_modules/**/*',
+				'!lib-cov/**/*'
 			]
 		}
 	};

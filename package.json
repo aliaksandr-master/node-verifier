@@ -39,6 +39,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-eslint": "^18.1.0",
     "grunt-newer": "^1.1.1",
-    "grunto": "^3.0.3"
+    "grunto": "^3.0.3",
+    "jit-grunt": "^0.10.0"
   }
 }

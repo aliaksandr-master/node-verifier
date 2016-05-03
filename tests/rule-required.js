@@ -75,7 +75,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'required',
-		value: [1],
+		value: [ 1 ],
 		expect: true
 	},
 	{

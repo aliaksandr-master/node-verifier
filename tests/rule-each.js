@@ -16,7 +16,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'each type object',
-		value: [{}],
+		value: [ {} ],
 		expect: 'REACH1'
 	},
 	{
@@ -35,16 +35,16 @@ exports.examples = tester([
 	},
 	{
 		rules: { 'each': [ 'type object', 'not empty' ] },
-		value: [{}],
+		value: [ {} ],
 		verr: {
 			rule: 'not',
-			params: [{ empty: null }],
+			params: [ { empty: null } ],
 			index: 0
 		}
 	},
 	{
 		rules: 'each type object',
-		value: [333],
+		value: [ 333 ],
 		verr: {
 			rule: 'type',
 			params: 'object',
@@ -62,7 +62,7 @@ exports.examples = tester([
 	},
 	{
 		rules: { each: [ 'max_value 10', 'max_length 1' ] },
-		value: [{}],
+		value: [ {} ],
 		verr: {
 			rule: 'max_value',
 			params: 10,
@@ -71,7 +71,7 @@ exports.examples = tester([
 	},
 	{
 		rules: { each: [ 'type number', 'max_value 10', 'max_length 1' ] },
-		value: [{}],
+		value: [ {} ],
 		verr: {
 			rule: 'type',
 			params: 'number',

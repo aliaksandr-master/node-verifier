@@ -4,9 +4,10 @@
 var _ = require('lodash');
 var Verifier = require('./lib');
 var async = require('async');
+var util = require('util');
 
 var inspect = function (value) {
-	return '\n' + require('util').inspect(value, { depth: null, colors: true }) + '\n';
+	return '\n' + util.inspect(value, { depth: null, colors: true }) + '\n';
 };
 
 require('colors');
@@ -27,16 +28,16 @@ var tester = function (cases) {
 
 			try {
 				verifier = new Verifier(testCase.rules);
-			} catch (e) {
+			} catch (err) {
 				if (testCase.error) {
 					if (typeof testCase.error === 'string') {
-						var r = e.message.indexOf('#' + testCase.error + ': ') === 0;
+						var res = err.message.indexOf('#' + testCase.error + ': ') === 0;
 
-						if (!r) {
-							console.error('>>> #' + number + ': ', ('must be error! #' + testCase.error + ' -> given "' + e.message + '"').red);
+						if (!res) {
+							console.error('>>> #' + number + ': ', ('must be error! #' + testCase.error + ' -> given "' + err.message + '"').red);
 						}
 
-						test.ok(r);
+						test.ok(res);
 					}
 					test.ok(true);
 					done();
@@ -44,7 +45,7 @@ var tester = function (cases) {
 					return;
 				}
 
-				done(e);
+				done(err);
 
 				return;
 			}

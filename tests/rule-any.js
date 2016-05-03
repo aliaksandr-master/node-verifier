@@ -13,8 +13,8 @@ exports.examples = tester([
 	{
 		rules: {
 			any: [
-				[{ type: 'object' }],
-				[{ type: 'string' }]
+				[ { type: 'object' } ],
+				[ { type: 'string' } ]
 			]
 		},
 		value: 333,
@@ -26,8 +26,8 @@ exports.examples = tester([
 	{
 		rules: {
 			any: {
-				branch1: [{ type: 'object' }],
-				branch2: [{ type: 'string' }]
+				branch1: [ { type: 'object' } ],
+				branch2: [ { type: 'string' } ]
 			}
 		},
 		value: 333,
@@ -39,8 +39,8 @@ exports.examples = tester([
 	{
 		rules: {
 			any: {
-				branch1: [{ type: 'object' }],
-				branch2: [{ type: 'string' }]
+				branch1: [ { type: 'object' } ],
+				branch2: [ { type: 'string' } ]
 			}
 		},
 		value: '123',
@@ -166,8 +166,8 @@ exports['check error'] = function (test) {
 
 	var verifier = new Verifier({
 		'any': [
-			[{ type: 'object' }],
-			[{ mySuperRule: '123123' }]
+			[ { type: 'object' } ],
+			[ { mySuperRule: '123123' } ]
 		]
 	});
 

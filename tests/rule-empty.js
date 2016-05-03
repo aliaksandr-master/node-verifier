@@ -95,7 +95,7 @@ exports.examples = tester([
 	},
 	{
 		rules: 'empty',
-		value: [1],
+		value: [ 1 ],
 		verr: {
 			rule: 'empty',
 			params: null,

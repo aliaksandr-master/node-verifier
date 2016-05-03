@@ -9,12 +9,12 @@ exports.flow = {
 	standard_call: tester([
 		{ rules: 'type string', value: 4, verr: { rule: 'type', params: 'string', index: null } },
 		{ rules: 'type string', value: '', expect: true },
-		{ rules: ['type string'], value: 4, verr: { rule: 'type', params: 'string', index: null } },
-		{ rules: ['type string'], value: '', expect: true },
+		{ rules: [ 'type string' ], value: 4, verr: { rule: 'type', params: 'string', index: null } },
+		{ rules: [ 'type string' ], value: '', expect: true },
 		{ rules: { type: 'string' }, value: 4, verr: { rule: 'type', params: 'string', index: null } },
 		{ rules: { type: 'string' }, value: '', expect: true },
-		{ rules: [{ type: 'string' }], value: 4, verr: { rule: 'type', params: 'string', index: null } },
-		{ rules: [{ type: 'string' }], value: '', expect: true },
+		{ rules: [ { type: 'string' } ], value: 4, verr: { rule: 'type', params: 'string', index: null } },
+		{ rules: [ { type: 'string' } ], value: '', expect: true },
 		{ rules: [ 'type string', 'max_length 2' ], value: 4, verr: { rule: 'type', params: 'string', index: null } },
 		{ rules: [ 'type string', 'max_length 2' ], value: '1', expect: true },
 		{ rules: [ { type: 'string' }, { max_length: 2 } ], value: 4, verr: { rule: 'type', params: 'string', index: null } },
@@ -95,9 +95,9 @@ exports.flow = {
 		});
 
 		test.throws(function () {
-			var f = function () {};
+			var func = function () {};
 
-			f.prototype = { check: function () {} };
+			func.prototype = { check: function () {} };
 			Verifier.Rule.add('some1', function () {});
 		});
 

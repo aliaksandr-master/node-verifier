@@ -3,13 +3,13 @@
 var extend = require('./_lib/utils-extend');
 
 exports.instanceof = function (test) {
-	var F = function () {};
+	var SomeClass = function () {};
 
-	extend(F, Error);
+	extend(SomeClass, Error);
 
-	var f = new F();
+	var some = new SomeClass();
 
-	test.ok(f instanceof Error);
-	test.ok(f instanceof F);
+	test.ok(some instanceof Error);
+	test.ok(some instanceof SomeClass);
 	test.done();
 };
